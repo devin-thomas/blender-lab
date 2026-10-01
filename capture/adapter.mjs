@@ -11,6 +11,23 @@ export const scenarios = [
   ['BL-005', 'Rigid body simulation'], ['BL-006', 'glTF roundtrip'],
   ['BL-007', 'Modular environment kit'], ['BL-008', 'Vertex shade composition'],
   ['BL-009', 'Gradient-card atmosphere'],
+  ['BL-010', 'Rig and deformation desk'],
+  ['BL-011', 'Action and NLA bench'],
+  ['BL-012', 'Camera and staging lab'],
+  ['BL-013', 'Geometry Nodes scatter'],
+  ['BL-014', 'Geometry Nodes field inspector'],
+  ['BL-015', 'UV and texel audit'],
+  ['BL-019', 'Compositor bench'],
+  ['BL-020', 'Lighting observatory'],
+  ['BL-021', 'Asset-browser kit'],
+  ['BL-022', 'Sprite-sheet camera'],
+  ['BL-025', 'Topology surgery'],
+  ['BL-026', 'Boolean assembly'],
+  ['BL-027', 'Retopology projection desk'],
+  ['BL-028', 'Mesh attribute contracts'],
+  ['BL-029', 'Shape-key expression desk'],
+  ['BL-030', 'Curve path and profile forge'],
+  ['BL-031', 'Typography geometry desk'],
 ].map(([id, name]) => ({ id: id.toLowerCase(), name, parameters: { value: { type: 'number', minimum: 0.1, maximum: 2, default: 1 } }, requiredCapabilities: ['scenarios'] }));
 
 export function validateRecipe(recipe) {

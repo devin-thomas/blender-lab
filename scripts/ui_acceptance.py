@@ -22,7 +22,7 @@ def run():
         bpy.ops.preferences.addon_enable(module='blender_lab')
         import blender_lab
         from blender_lab import labs, verification
-        from blender_lab import catalog
+        from blender_lab import catalog, controls
         verification.check(len(catalog.ENTRIES) == 96, 'Installed package did not load the full atlas')
         verification.check(catalog.filtered('BL-096')[0]['id'] == 'BL-096', 'Planned lab search failed')
         verification.check({entry['id'] for entry in catalog.filtered(available=labs.LABS)} == set(labs.LABS),
@@ -37,6 +37,15 @@ def run():
             bpy.ops.blender_lab.open(lab=lab)
             scene = bpy.context.scene
             scene.blender_lab_value_control = 1.25
+            if lab in labs.ADAPTERS:
+                item = catalog.BY_ID[lab]['controls'][0]
+                if item['type'] == 'enum':
+                    value = next(value for value in item['options'] if value != item['default'])
+                elif item['type'] == 'integer':
+                    value = int(item['minimum']) if item['minimum'] != item['default'] else int(item['maximum'])
+                else:
+                    value = float(item['minimum']) if item['minimum'] != item['default'] else float(item['maximum'])
+                scene[controls.property_name(item['name'])] = value
             bpy.ops.blender_lab.apply()
             metrics = verification.verify(scene, OUTPUT)
             bpy.ops.blender_lab.reset()
@@ -59,6 +68,7 @@ def run():
         exports = list(OUTPUT.glob('artifact-*'))
         verification.check(len(exports) >= 2 and all((p / 'artifact.glb').is_file() for p in exports), 'UI exports overwrote a prior take')
         bpy.ops.render.render(write_still=True)
+        bpy.ops.blender_lab.open(lab='BL-010')
         (OUTPUT / 'evidence.json').write_text(json.dumps({'passed': True, 'timestamp': datetime.now(timezone.utc).isoformat(), 'blender': bpy.app.version_string,
             'installed_module': blender_lab.__file__, 'atlas_entries': len(catalog.ENTRIES),
             'catalog_sha256': hashlib.sha256((Path(blender_lab.__file__).parent / 'catalog.json').read_bytes()).hexdigest(),

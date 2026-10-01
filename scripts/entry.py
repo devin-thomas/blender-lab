@@ -10,8 +10,180 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import bpy
 import blender_lab
-from blender_lab import labs, verification
+from blender_lab import catalog, controls, labs, verification
 from blender_lab.operations import Request, perform
+
+
+# These select measured outcomes, excluding echoed controls and artifact paths.
+OUTCOMES = {
+    'BL-010': {'Bend angle': ('weighted.max_displacement', 'weighted.tip_vertex'),
+               'Weight transition': ('weighted.middle_vertex',)},
+    'BL-011': {'Blend frames': ('samples', 'strip_bounds'), 'Clip offset': ('samples', 'strip_bounds')},
+    'BL-012': {'Field of view': ('gameplay.coverage',), 'Subject distance': ('gameplay.coverage',)},
+    'BL-013': {'Density': ('evaluated_instance_count', 'evaluated_vertices'), 'Seed': ('position_signature',)},
+    'BL-014': {'Domain': ('attribute_count', 'sample_range'), 'Threshold': ('selected_count',)},
+    'BL-015': {'Target density': ('measured_densities',), 'Margin pixels': ('margin_pixels',)},
+    'BL-019': {'Treatment amount': ('clean_requested_max_error',), 'Output width': ('output_height',)},
+    'BL-020': {'Key energy': ('key_energy',), 'Renderer': ('renderer',)},
+    'BL-021': {'Asset role': ('asset_id',), 'Preview size': ('preview_size',)},
+    'BL-022': {'Frames': ('atlas_size', 'distinct_pixel_frames'), 'Cell size': ('atlas_size', 'alpha_bounds')},
+    'BL-025': {'Cut position': ('edited_geometry_signature',), 'Dissolve angle': ('vertices', 'edges', 'faces')},
+    'BL-026': {'Opening width': ('evaluated_volume',), 'Operation': ('evaluated_volume',)},
+    'BL-027': {'Surface offset': ('distance_range',), 'Cage density': ('cage_vertices', 'cage_faces')},
+    'BL-028': {'Attribute domain': ('element_count',), 'Data type': ('sample',)},
+    'BL-029': {'Expression weight': ('brow_vertex',), 'Secondary weight': ('mouth_vertex',)},
+    'BL-030': {'Path resolution': ('evaluated_vertices',), 'Profile radius': ('cross_section_radius', 'bounds')},
+    'BL-031': {'Extrusion': ('evaluated_thickness',), 'Text width': ('text_width',)},
+}
+
+
+def _outcome(lab, name, metrics):
+    verification.check(lab in OUTCOMES and name in OUTCOMES[lab],
+                       f'{lab} / {name} has no declared measured outcome selector')
+    result = {}
+    for path in OUTCOMES[lab][name]:
+        value = metrics
+        for key in path.split('.'):
+            verification.check(isinstance(value, dict) and key in value,
+                               f'{lab} / {name} is missing measured metric {path}')
+            value = value[key]
+        if path == 'samples':
+            value = [{'hinge_radians': sample['hinge_radians'], 'world_tip': sample['world_tip']}
+                     for sample in value]
+        result[path] = value
+    return result
+
+
+def _candidates(item):
+    kind, default = item['type'], item['default']
+    if kind == 'enum':
+        return list(item['options'])
+    if kind == 'boolean':
+        return [not default]
+    if kind in ('integer', 'number'):
+        low, high = item['minimum'], item['maximum']
+        values = [low, high, (low + high) / 2]
+        if kind == 'integer':
+            values = [int(round(value)) for value in values]
+        return list(dict.fromkeys(values))
+    raise AssertionError(f'No bounded alternate scenario for control type {kind}')
+
+
+def _apply(scene, lab, supplied, value=1):
+    return perform(Request('apply', lab, value, scene_id=scene['blender_lab_instance_id'],
+                           controls_json=json.dumps(supplied, allow_nan=False)), scene)
+
+
+def _admission_state(scene):
+    return {'controls': scene.get('blender_lab_controls'), 'value': scene['blender_lab_value'],
+            'instance': scene['blender_lab_instance_id'], 'assets': labs.snapshot(),
+            'scenes': tuple(bpy.data.scenes.keys()), 'active': bpy.context.scene.as_pointer()}
+
+
+def _case_metrics(scene, lab, output):
+    metrics = verification.verify(scene, output)
+    if lab == 'BL-025':
+        mesh = labs.subject(scene).data
+        geometry = {'vertices': [list(vertex.co) for vertex in mesh.vertices],
+                    'faces': [list(polygon.vertices) for polygon in mesh.polygons]}
+        metrics['edited_geometry_signature'] = hashlib.sha256(json.dumps(geometry, sort_keys=True).encode()).hexdigest()
+    return metrics
+
+
+def _typed_test(scene, lab, output, request, receipt, sentinel, original_scene):
+    requested = json.loads(scene['blender_lab_controls'])
+    defaults = controls.validate(lab)
+    schema = catalog.BY_ID[lab]['controls']
+    _apply(scene, lab, defaults)
+    baseline = _case_metrics(scene, lab, output)
+    before = _admission_state(scene)
+    verification.check(perform(request) == receipt and _admission_state(scene) == before,
+                       'Repeated typed request produced duplicate scene state')
+    invalid = [('unknown-name', {'Undeclared control': 1}), ('null-root', None), ('array-root', []), ('boolean-root', True)]
+    for item in schema:
+        name, kind = item['name'], item['type']
+        if kind in ('integer', 'number'):
+            invalid.extend([(name + '/boolean', {name: True}), (name + '/nonfinite', {name: float('nan')}),
+                            (name + '/below-minimum', {name: item['minimum'] - 1}),
+                            (name + '/above-maximum', {name: item['maximum'] + 1})])
+            if kind == 'integer':
+                invalid.append((name + '/fraction', {name: item['default'] + .5}))
+        elif kind == 'enum':
+            invalid.extend([(name + '/unknown-choice', {name: '__unavailable__'}), (name + '/boolean', {name: True})])
+        elif kind == 'boolean':
+            invalid.extend([(name + '/integer', {name: 1}), (name + '/string', {name: 'true'})])
+    rejection_records = []
+    for label, supplied in invalid:
+        rejected = Request('apply', lab, scene_id=scene['blender_lab_instance_id'], controls_json=json.dumps(supplied))
+        try:
+            perform(rejected, scene)
+        except ValueError as error:
+            rejection_records.append({'case': label, 'error': str(error)})
+        else:
+            raise AssertionError(f'{lab} admitted invalid typed control: {label}')
+        verification.check(_admission_state(scene) == before, f'{lab} rejected {label} after mutating scene/data')
+    for rejected in (Request('open', lab, 1.5, request_id=request.request_id),
+                     Request('apply', lab, scene_id='different-instance'), Request('open', 'BL-096')):
+        try:
+            perform(rejected, scene)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('Conflicting retry, wrong scope or planned adapter was admitted')
+        verification.check(_admission_state(scene) == before, 'Rejected request changed owned scene state')
+    after_rejection = _case_metrics(scene, lab, output)
+    for item in schema:
+        verification.check(_outcome(lab, item['name'], baseline) == _outcome(lab, item['name'], after_rejection),
+                           'Rejected typed control altered the measured mechanism')
+    cases, alternates = [], {}
+    for item in schema:
+        name = item['name']
+        observed_change = False
+        for candidate in _candidates(item):
+            _apply(scene, lab, defaults)
+            _apply(scene, lab, {name: candidate})
+            expected = dict(defaults, **{name: candidate})
+            verification.check(json.loads(scene['blender_lab_controls']) == expected,
+                               f'{lab} partial {name} Apply lost another control')
+            measured = _case_metrics(scene, lab, output)
+            outcome = _outcome(lab, name, measured)
+            changed = outcome != _outcome(lab, name, baseline)
+            cases.append({'control': name, 'value': candidate, 'measured_outcome': outcome, 'changed': changed})
+            if candidate != item['default'] and changed:
+                observed_change = True
+                alternates.setdefault(name, candidate)
+        verification.check(observed_change, f'{lab} / {name} has no measured effect for its bounded alternatives')
+    # Independent cases above keep other inputs at defaults. This checks sequential merging.
+    _apply(scene, lab, defaults)
+    combined = dict(defaults)
+    for item in schema:
+        name = item['name']
+        _apply(scene, lab, {name: alternates[name]})
+        combined[name] = alternates[name]
+        verification.check(json.loads(scene['blender_lab_controls']) == combined,
+                           f'{lab} partial-control merge reverted a prior input')
+    verification.verify(scene, output)
+    shared_data = labs.subject(scene).data
+    shared = bpy.data.objects.new('Shared owned-data acceptance sentinel', shared_data)
+    original_scene.collection.objects.link(shared)
+    old_assets = json.loads(scene['blender_lab_assets'])
+    old_instance = scene['blender_lab_instance_id']
+    perform(Request('reset', lab, scene_id=old_instance), scene)
+    scene = bpy.context.scene
+    verification.check(scene['blender_lab_instance_id'] != old_instance and sentinel.name in original_scene.objects,
+                       'Reset reused its instance or destroyed user scene content')
+    verification.check(shared.name in original_scene.objects and shared.data == shared_data and shared_data.users > 0,
+                       'Reset deleted owned data shared by a user scene')
+    verification.check(json.loads(scene['blender_lab_controls']) == defaults, 'Typed reset did not restore card defaults')
+    verification.verify(scene, output)
+    bpy.data.objects.remove(shared, do_unlink=True)
+    labs.remove_unused(old_assets)
+    _apply(scene, lab, requested)
+    metrics = verification.verify(scene, output)
+    return scene, metrics, {'default_metrics': baseline, 'control_cases': cases,
+                            'rejected_inputs': rejection_records, 'partial_merge': 'passed',
+                            'owned_and_shared_sentinels': 'passed', 'reset_defaults': 'passed',
+                            'fresh_process_reopen': 'requires-wave-or-reopen-check'}
 
 
 def main():
@@ -20,8 +192,18 @@ def main():
     parser.add_argument('--lab', choices=list(labs.LABS))
     parser.add_argument('--output', type=Path, default=ROOT / 'build')
     parser.add_argument('--value', type=float, default=1)
+    parser.add_argument('--controls-file', type=Path, help='JSON object keyed by exact displayed control names; requires --lab')
     parser.add_argument('--render', action='store_true')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
+    if args.controls_file and not args.lab:
+        parser.error('--controls-file requires one selected --lab')
+    supplied = None
+    if args.controls_file:
+        supplied = json.loads(args.controls_file.read_text(encoding='utf-8-sig'))
+        if not isinstance(supplied, dict):
+            parser.error('--controls-file must contain a JSON object keyed by exact displayed control names')
+        controls.validate(args.lab, supplied)
+    supplied_json = json.dumps(supplied, sort_keys=True, allow_nan=False) if supplied is not None else ''
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     blender_lab.register()
@@ -36,13 +218,16 @@ def main():
     bpy.context.scene.collection.objects.link(sentinel)
     original_scene = bpy.context.scene
     for lab in selected:
-        request = Request('open', lab, args.value)
+        request = Request('open', lab, args.value, controls_json=supplied_json)
         receipt = perform(request)
         scene = bpy.context.scene
         lab_output = output if len(selected) == 1 else output / lab
         lab_output.mkdir(parents=True, exist_ok=True)
         metrics = verification.verify(scene, lab_output)
-        if args.action == 'test':
+        test_cases = None
+        if args.action == 'test' and lab in labs.ADAPTERS:
+            scene, metrics, test_cases = _typed_test(scene, lab, lab_output, request, receipt, sentinel, original_scene)
+        elif args.action == 'test':
             scene_count = len(bpy.data.scenes)
             verification.check(perform(request) == receipt and len(bpy.data.scenes) == scene_count,
                                'Repeated request produced duplicate scene state')
@@ -88,7 +273,10 @@ def main():
             bpy.ops.render.render(write_still=True)
         path = lab_output / f'{lab}.blend'
         bpy.ops.wm.save_as_mainfile(filepath=str(path))
-        report['labs'].append({'id': lab, 'status': 'passed', 'value': args.value, 'metrics': metrics,
+        verification.check(sentinel.name in original_scene.objects, 'Operation destroyed user scene sentinel')
+        report['labs'].append({'id': lab, 'status': 'passed', 'value': scene['blender_lab_value'], 'metrics': metrics,
+                              'requested_value': args.value,
+                              'controls': json.loads(scene.get('blender_lab_controls', '{}')), 'test_cases': test_cases,
                               'operation_request_id': json.loads(scene['blender_lab_receipt'])['request_id'],
                               'open_request_id': receipt.request_id})
     (output / 'evidence.json').write_text(json.dumps(report, indent=2) + '\n')

@@ -6,7 +6,7 @@ Entries bind ID/title/category, visible moment, API research leads, typed contro
 
 ## Local operations v1
 
-Request fields: operation (open/apply/reset), implemented ID, finite value 0.1..2, scene instance ID for Apply/Reset and bounded request ID. Booleans/nonfinite/out-of-range values and mismatched scope fail before mutation. Receipt fields: schema version, request ID, operation, lab, resulting instance/value, summary and UTC timestamp. Receipts live on generated scenes. Retry retention is process-local, capped at 128; restarting Blender loses it.
+Request fields: operation (open/apply/reset), implemented ID, finite value 0.1..2, scene instance ID for Apply/Reset and bounded request ID and optional immutable `controls_json` string (maximum 16384 characters). Nonempty typed payloads must be JSON objects keyed by exact declared control names; Reset rejects typed payloads. Booleans/nonfinite/out-of-range values and mismatched scope fail before mutation. Receipt fields: schema version, request ID, operation, lab, resulting instance/value, summary, UTC timestamp and serialized applied controls. Typed payloads are canonicalized for request signature comparison. Receipts live on generated scenes. Retry retention is process-local, capped at 128; restarting Blender loses it.
 
 ## Evidence
 

@@ -57,6 +57,9 @@ def roundtrip(scene, output):
 
 
 def verify(scene, output):
+    implementation = labs.adapter(scene.get('blender_lab_id'))
+    if implementation:
+        return implementation.verify(scene, scene['blender_lab_id'], json.loads(scene['blender_lab_controls']), output)
     lab = scene["blender_lab_id"]
     obj = labs.subject(scene)
     value = scene["blender_lab_value"]

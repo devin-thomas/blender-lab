@@ -2,7 +2,7 @@
 
 **Make a thing. Change the mechanism. Inspect what survives.**
 
-Blender Lab is an editable capability atlas inside Blender: **96 detailed experiment contracts**, **16 core infrastructure tickets** and **192 implementation/qualification tickets** cover Blender authoring and automation. Nine working original scenes currently exercise geometry, surfaces, procedural repetition, motion, simulation, interchange, modular environments, shader comparison and atmosphere. The scene, node tree, modifier stack and timeline are the product; measured receipts explain what actually ran.
+Blender Lab is an editable capability atlas inside Blender: **96 detailed experiment contracts**, **16 core infrastructure tickets** and **192 implementation/qualification tickets** cover Blender authoring and automation. Twenty-six implemented adapters span modeling, surfaces, procedural geometry, rigging, actions, staging, simulation, interchange, compositor, lighting, asset metadata and sprite production. Qualification is recorded separately for each adapter. The scene, node tree, modifier stack and timeline are the product; measured receipts explain what actually ran.
 
 The first implementation targets Blender **5.2.2 LTS**. The add-on declares Blender 5.2 as its minimum; other releases remain unqualified until tested. Current execution evidence and remaining editor gates belong in [BUILD_STATUS](docs/BUILD_STATUS.md).
 
@@ -11,9 +11,9 @@ The first implementation targets Blender **5.2.2 LTS**. The add-on declares Blen
 1. Run `python scripts/package.py` to create the local add-on ZIP.
 2. In Blender, use Preferences > Add-ons > Install from Disk, select the generated ZIP, and enable Blender Lab.
 3. In the 3D Viewport, press **N**, open **Blender Lab**, search/filter the atlas and build an available lab. Planned entries show their contract and status.
-4. Change Experiment value and click Apply experiment value, then inspect its objects, materials, modifiers, nodes, or timeline. Save your own `.blend` copy when you want to keep edits.
+4. Change the available controls and click Apply controls, then inspect its objects, materials, modifiers, nodes, or timeline. Save your own `.blend` copy when you want to keep edits.
 
-[START_HERE](docs/START_HERE.md) explains the first journey and scripted workflow. Each Open experiment action creates a new separate scene. Apply experiment value changes the active lab; Reset this lab asks for confirmation and replaces only that active lab scene, discarding its edits.
+[START_HERE](docs/START_HERE.md) explains the first journey and scripted workflow. Each Open experiment action creates a new separate scene. Apply controls changes the active lab; Reset this lab asks for confirmation and replaces only that active lab scene, discarding its edits.
 
 ```powershell
 python scripts/run.py --blender "C:\path\to\blender.exe" build

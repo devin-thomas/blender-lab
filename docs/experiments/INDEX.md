@@ -9,10 +9,10 @@
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
 | [BL-001](BL-001.md) | Silhouette Foundry | See a small bevel change a sparse original silhouette without destroying its base mesh. | implemented | expanded-qualification-pending |
-| [BL-025](BL-025.md) | Topology surgery | Apply one topological edit and inspect manifoldness before trusting the silhouette. | specified | not-run |
-| [BL-026](BL-026.md) | Boolean assembly | Inspect an opening created by subtraction while keeping operands editable. | specified | not-run |
-| [BL-027](BL-027.md) | Retopology projection desk | Fit a sparse cage to an original curved target without confusing projection with good topology. | specified | not-run |
-| [BL-029](BL-029.md) | Shape-key expression desk | Blend two original expressions and inspect the vertex motion rather than a rendered face alone. | specified | not-run |
+| [BL-025](BL-025.md) | Topology surgery | Apply one topological edit and inspect manifoldness before trusting the silhouette. | implemented | qualification-pending |
+| [BL-026](BL-026.md) | Boolean assembly | Inspect an opening created by subtraction while keeping operands editable. | implemented | qualification-pending |
+| [BL-027](BL-027.md) | Retopology projection desk | Fit a sparse cage to an original curved target without confusing projection with good topology. | implemented | qualification-pending |
+| [BL-029](BL-029.md) | Shape-key expression desk | Blend two original expressions and inspect the vertex motion rather than a rendered face alone. | implemented | qualification-pending |
 
 ## Materials and UV
 
@@ -20,7 +20,7 @@
 |---|---|---|---|---|
 | [BL-002](BL-002.md) | Pixel Surface Studio | Separate original pixel detail from broad vertex shade and inspect both contributions. | implemented | expanded-qualification-pending |
 | [BL-008](BL-008.md) | Vertex shade composition | Compare texture-only, authored shade and restrained light without mistaking them for the same mechanism. | implemented | expanded-qualification-pending |
-| [BL-015](BL-015.md) | UV and texel audit | Find a stretched island or leaking atlas margin before it becomes a game-art defect. | specified | not-run |
+| [BL-015](BL-015.md) | UV and texel audit | Find a stretched island or leaking atlas margin before it becomes a game-art defect. | implemented | qualification-pending |
 | [BL-016](BL-016.md) | Bake and material bridge | Carry a chosen authored shade into a portable image and compare it with the editable source. | specified | not-run |
 | [BL-036](BL-036.md) | Material graph migration | Upgrade a known material contract while preserving unrelated user nodes. | specified | not-run |
 | [BL-059](BL-059.md) | Procedural material spectrum | Inspect scale and seed in an original procedural material before baking it into texture space. | specified | not-run |
@@ -32,8 +32,8 @@
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
 | [BL-003](BL-003.md) | Instance Conservatory | Change a row count and inspect the realized geometry that actually reaches the renderer. | implemented | expanded-qualification-pending |
-| [BL-013](BL-013.md) | Geometry Nodes scatter | Scatter original modules with a seed you can replay and a density you can afford. | specified | not-run |
-| [BL-014](BL-014.md) | Geometry Nodes field inspector | See why a field changes when it crosses point, edge and face domains. | specified | not-run |
+| [BL-013](BL-013.md) | Geometry Nodes scatter | Scatter original modules with a seed you can replay and a density you can afford. | implemented | qualification-pending |
+| [BL-014](BL-014.md) | Geometry Nodes field inspector | See why a field changes when it crosses point, edge and face domains. | implemented | qualification-pending |
 | [BL-032](BL-032.md) | Geometry Nodes simulation loop | Persist a small state through frames and inspect what the simulation zone remembers. | specified | not-run |
 | [BL-033](BL-033.md) | Geometry Nodes repeat machine | Iterate a bounded construction and inspect why repeat count changes the final geometry. | specified | not-run |
 | [BL-034](BL-034.md) | Geometry Nodes bake boundary | Freeze one procedural result and see which editable inputs are deliberately no longer live. | specified | not-run |
@@ -44,7 +44,7 @@
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
 | [BL-004](BL-004.md) | Motion Signal | Edit a travel beat and prove the object reaches its apex before returning. | implemented | expanded-qualification-pending |
-| [BL-011](BL-011.md) | Action and NLA bench | Reuse two clips and inspect a transition rather than hiding motion in a baked movie. | specified | not-run |
+| [BL-011](BL-011.md) | Action and NLA bench | Reuse two clips and inspect a transition rather than hiding motion in a baked movie. | implemented | qualification-pending |
 | [BL-040](BL-040.md) | Animation bake interchange | Bake a constrained motion and compare sampled output before sending it elsewhere. | specified | not-run |
 
 ## Simulation
@@ -83,7 +83,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-010](BL-010.md) | Rig and deformation desk | Compare a rigid segmented limb with a weighted limb at the same bend. | specified | not-run |
+| [BL-010](BL-010.md) | Rig and deformation desk | Compare a rigid segmented limb with a weighted limb at the same bend. | implemented | qualification-pending |
 | [BL-037](BL-037.md) | Drivers and constraint observatory | Explain a driven motion by inspecting its variables and constraint order. | specified | not-run |
 | [BL-038](BL-038.md) | Inverse-kinematics reach desk | Move an effector and measure which poses are reachable without hiding joint limits. | specified | not-run |
 | [BL-039](BL-039.md) | Pose asset library | Reuse a labeled original pose while preserving bone identity and blend meaning. | specified | not-run |
@@ -92,7 +92,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-012](BL-012.md) | Camera and staging lab | Prove a detail reads at gameplay distance before spending geometry on its close-up. | specified | not-run |
+| [BL-012](BL-012.md) | Camera and staging lab | Prove a detail reads at gameplay distance before spending geometry on its close-up. | implemented | qualification-pending |
 | [BL-047](BL-047.md) | Camera solve reconstruction desk | Recover a generated camera motion and compare it with the known original camera. | specified | not-run |
 | [BL-048](BL-048.md) | Lens distortion calibration | Separate lens distortion from camera motion using a generated reference grid. | specified | not-run |
 | [BL-050](BL-050.md) | Planar sign replacement | Place an original sign onto a generated moving plane and measure corner alignment. | specified | not-run |
@@ -101,7 +101,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-019](BL-019.md) | Compositor bench | Compare clean output with one deliberate display treatment without obscuring the mechanism. | specified | not-run |
+| [BL-019](BL-019.md) | Compositor bench | Compare clean output with one deliberate display treatment without obscuring the mechanism. | implemented | qualification-pending |
 | [BL-049](BL-049.md) | Rotoscope mask desk | Edit a mask that follows one original moving subject and inspect the matte edges. | specified | not-run |
 | [BL-055](BL-055.md) | Render passes and AOV inspector | Inspect separate scene contributions and trace a final composite back to its pass inputs. | specified | not-run |
 
@@ -109,7 +109,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-020](BL-020.md) | Lighting observatory | Compare world, area-light and material response while recording the rendering conditions. | specified | not-run |
+| [BL-020](BL-020.md) | Lighting observatory | Compare world, area-light and material response while recording the rendering conditions. | implemented | qualification-pending |
 | [BL-056](BL-056.md) | Light linking room | Make a light affect one original object group and prove an excluded object stays unchanged. | specified | not-run |
 | [BL-057](BL-057.md) | Shadow catcher composition | Composite an original object onto an original plate and inspect the shadow contribution separately. | specified | not-run |
 | [BL-058](BL-058.md) | World environment forge | Build an original environment map and distinguish background appearance from lighting energy. | specified | not-run |
@@ -119,7 +119,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-021](BL-021.md) | Asset-browser kit | Reuse an original part and see its provenance rather than searching unnamed files. | specified | not-run |
+| [BL-021](BL-021.md) | Asset-browser kit | Reuse an original part and see its provenance rather than searching unnamed files. | implemented | qualification-pending |
 | [BL-074](BL-074.md) | Texture footprint and packing audit | Find an oversized or unresolved image dependency before distributing a scene. | specified | not-run |
 | [BL-075](BL-075.md) | Linked library override desk | Change one permitted part of an original linked asset while keeping its library origin visible. | specified | not-run |
 | [BL-076](BL-076.md) | Asset catalogs and provenance | Browse original assets by role and trace a selected result to its source/license metadata. | specified | not-run |
@@ -128,7 +128,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-022](BL-022.md) | Sprite-sheet camera | Render a small original motion as an ordered transparent sprite atlas. | specified | not-run |
+| [BL-022](BL-022.md) | Sprite-sheet camera | Render a small original motion as an ordered transparent sprite atlas. | implemented | qualification-pending |
 
 ## Automation evidence
 
@@ -143,7 +143,7 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-028](BL-028.md) | Mesh attribute contracts | Make a wrong attribute domain or data type fail before downstream nodes consume it. | specified | not-run |
+| [BL-028](BL-028.md) | Mesh attribute contracts | Make a wrong attribute domain or data type fail before downstream nodes consume it. | implemented | qualification-pending |
 | [BL-078](BL-078.md) | Units and transform conventions | Make a scale/axis mismatch visible before an original asset leaves Blender. | specified | not-run |
 | [BL-085](BL-085.md) | Point-cloud intake contract | Inspect a neutral point dataset and reject wrong units or attribute schemas before conversion. | specified | not-run |
 
@@ -151,8 +151,8 @@
 
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
-| [BL-030](BL-030.md) | Curve path and profile forge | Sweep an original profile along a path and inspect the editable curve that creates it. | specified | not-run |
-| [BL-031](BL-031.md) | Typography geometry desk | Turn original station text into geometry without losing legibility or font provenance. | specified | not-run |
+| [BL-030](BL-030.md) | Curve path and profile forge | Sweep an original profile along a path and inspect the editable curve that creates it. | implemented | qualification-pending |
+| [BL-031](BL-031.md) | Typography geometry desk | Turn original station text into geometry without losing legibility or font provenance. | implemented | qualification-pending |
 
 ## Grease Pencil
 

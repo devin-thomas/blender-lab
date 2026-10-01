@@ -4,7 +4,7 @@
 |---|---|---|
 | Native add-on | Atlas, scene actions, receipts, export | Installed real-window journeys |
 | CLI / bpy | Fresh-process generation/assertions | Runtime, save/reopen/render |
-| Cappy | Nine scripted record/replay recipes | Protocol and real Blender replay |
+| Cappy | 26 scripted scalar record/replay recipes | Protocol and real Blender replay |
 | Official Blender Lab MCP | Research/future adapter | No connection or installed server claimed |
 | Visible OBS | Planned visible adapter | No captured-media claim from background replay |
 | Isolated service | Planned budgets/checkpoints/queue | No deployed API claimed |

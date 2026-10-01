@@ -6,20 +6,56 @@ import bpy
 from mathutils import Vector
 
 LABS = {
-    "BL-001": ("Silhouette Foundry", "Change the bevel. Compare the base mesh and evaluated geometry."),
-    "BL-002": ("Pixel Surface Studio", "Change vertex shade strength. Inspect the UVs, packed atlas and shader."),
-    "BL-003": ("Instance Conservatory", "Change the count. Inspect Mesh Line, instancing and realization nodes."),
-    "BL-004": ("Motion Signal", "Change travel height. Scrub frames 1, 30 and 60; play the timeline."),
-    "BL-005": ("Gravity Bench", "Change release height. Reset then play from frame 1 to see the fall."),
-    "BL-006": ("Portable Artifact", "Change the artifact width. Export and reimport a selected mesh as glTF."),
-    "BL-007": ("Modular environment kit", "Change the wall span and doorway opening. Inspect linked wall, corner and stair meshes."),
-    "BL-008": ("Vertex shade composition", "Change shade strength. Compare the same beacon with texture, authored shades and restrained lighting."),
-    "BL-009": ("Gradient-card atmosphere", "Change gradient intensity. Orbit the portal to inspect authored contact and shaft cards."),
+    'BL-001': ('Silhouette Foundry', 'Change the bevel. Compare the base mesh and evaluated geometry.'),
+    'BL-002': ('Pixel Surface Studio', 'Change vertex shade strength. Inspect the UVs, packed atlas and shader.'),
+    'BL-003': ('Instance Conservatory', 'Change the count. Inspect Mesh Line, instancing and realization nodes.'),
+    'BL-004': ('Motion Signal', 'Change travel height. Scrub frames 1, 30 and 60; play the timeline.'),
+    'BL-005': ('Gravity Bench', 'Change release height. Reset then play from frame 1 to see the fall.'),
+    'BL-006': ('Portable Artifact', 'Change the artifact width. Export and reimport a selected mesh as glTF.'),
+    'BL-007': ('Modular environment kit', 'Change the wall span and doorway opening. Inspect linked wall, corner and stair meshes.'),
+    'BL-008': ('Vertex shade composition', 'Change shade strength. Compare the same beacon with texture, authored shades and restrained lighting.'),
+    'BL-009': ('Gradient-card atmosphere', 'Change gradient intensity. Orbit the portal to inspect authored contact and shaft cards.'),
+    'BL-010': ('Rig and deformation desk', 'Bend the weighted sleeve and compare its rigid reference. Inspect bone weights and evaluated vertices.'),
+    'BL-011': ('Action and NLA bench', 'Change clip blending and offset. Scrub the two slotted Actions and their NLA strips.'),
+    'BL-012': ('Camera and staging lab', 'Change field of view and subject distance. Compare gameplay and showcase camera coverage.'),
+    'BL-013': ('Geometry Nodes scatter', 'Change density and seed. Inspect evaluated reeds and original source.'),
+    'BL-014': ('Geometry Nodes field inspector', 'Change domain and threshold. Inspect named samples and selection cardinality.'),
+    'BL-015': ('UV and texel audit', 'Change target density and island margin. Inspect measured UV coverage and stretch.'),
+    'BL-019': ('Compositor bench', 'Change brightness treatment and output width. Inspect the packed chart and connected compositor.'),
+    'BL-020': ('Lighting observatory', 'Change key-light energy and renderer. Inspect the neutral reference surfaces and pending pixel gates.'),
+    'BL-021': ('Asset-browser kit', 'Select a reusable asset and thumbnail size. Inspect its metadata, stable identity and packed dependencies.'),
+    'BL-022': ('Sprite-sheet camera', 'Change sampled frames and cell size. Inspect transparent frames, atlas ordering and alpha bounds.'),
+    'BL-025': ('Topology surgery', 'Change cut position and dissolve angle. Inspect the closed editable wedge.'),
+    'BL-026': ('Boolean assembly', 'Change opening width and operation. Inspect exact evaluated wall volume.'),
+    'BL-027': ('Retopology projection desk', 'Change cage density and surface offset. Inspect target fit without editing the target.'),
+    'BL-028': ('Mesh attribute contracts', 'Change domain and data type. Inspect cardinality and known attribute samples.'),
+    'BL-029': ('Shape-key expression desk', 'Blend the brow and mouth shapes. Inspect relative keys and evaluated vertex offsets.'),
+    'BL-030': ('Curve path and profile forge', 'Change path resolution and profile radius. Inspect the editable sweep and converted mesh copy.'),
+    'BL-031': ('Typography geometry desk', 'Change text depth and width. Inspect bundled-font provenance, fitting and the converted mesh copy.'),
+}
+ADAPTERS = {
+    'BL-010': 'motion',
+    'BL-011': 'motion',
+    'BL-012': 'motion',
+    'BL-013': 'geometry',
+    'BL-014': 'geometry',
+    'BL-015': 'geometry',
+    'BL-019': 'production',
+    'BL-020': 'production',
+    'BL-021': 'production',
+    'BL-022': 'production',
+    'BL-025': 'geometry',
+    'BL-026': 'geometry',
+    'BL-027': 'geometry',
+    'BL-028': 'geometry',
+    'BL-029': 'motion',
+    'BL-030': 'motion',
+    'BL-031': 'motion',
 }
 PALETTE = {"navy": (0.025, 0.08, 0.12, 1), "teal": (0.08, 0.55, 0.50, 1),
            "amber": (0.95, 0.48, 0.09, 1), "cream": (0.80, 0.87, 0.66, 1)}
 DATA_COLLECTIONS = ('collections', 'objects', 'meshes', 'curves', 'cameras', 'lights',
-                    'actions', 'node_groups', 'materials', 'images', 'worlds', 'texts')
+                    'actions', 'node_groups', 'materials', 'images', 'worlds', 'texts', 'armatures', 'shape_keys')
 
 
 def snapshot():
@@ -40,7 +76,10 @@ def remove_unused(assets):
             collection = getattr(bpy.data, name)
             for asset_name in assets.get(name, []):
                 item = collection.get(asset_name)
-                if item is not None and item.users == 0:
+                # Asset marking can add a fake user. Retire that owned retention
+                # only after every real reference is gone; shared assets survive.
+                if item is not None and hasattr(collection, 'remove') and item.users == int(item.use_fake_user):
+                    item.use_fake_user = False
                     collection.remove(item)
                     removed = True
         if not removed:
@@ -252,6 +291,8 @@ def build(lab):
     elif lab in ('BL-007', 'BL-008', 'BL-009'):
         from . import authoring
         obj = authoring.build(scene, lab, obj)
+    elif lab in ADAPTERS:
+        obj = adapter(lab).build(scene, lab, obj)
     scene["blender_lab_subject_name"] = obj.name
     scene["blender_lab_value"] = 1.0
     activate(obj)
@@ -266,11 +307,40 @@ def subject(scene):
     return scene.objects[scene["blender_lab_subject_name"]]
 
 
+def adapter(lab):
+    from importlib import import_module
+    module = ADAPTERS.get(lab)
+    return import_module('.' + module, __package__) if module else None
+
+
+def apply_controls(scene, params):
+    from . import controls
+    lab = scene['blender_lab_id']
+    params = controls.validate(lab, params)
+    implementation = adapter(lab)
+    if implementation is None:
+        raise ValueError('Use Experiment value for the original nine adapters')
+    before = snapshot()
+    implementation.apply_controls(scene, lab, params)
+    scene['blender_lab_controls'] = json.dumps(params, sort_keys=True, allow_nan=False)
+    controls.expose(scene, lab, params)
+    track_new_assets(scene, before)
+    bpy.context.view_layer.update()
+
+
+def track_new_assets(scene, before):
+    assets = json.loads(scene.get('blender_lab_assets', '{}'))
+    for kind, names in created_since(before).items():
+        assets[kind] = sorted(set(assets.get(kind, [])) | set(names))
+    scene['blender_lab_assets'] = json.dumps(assets)
+
+
 def apply_value(scene, value):
     lab = scene.get("blender_lab_id")
-    if lab not in LABS or not .1 <= value <= 2:
+    if lab not in LABS or isinstance(value, bool) or not isinstance(value, (int, float)) or not .1 <= value <= 2:
         raise ValueError("Open a lab and use a value between 0.1 and 2.0")
     obj = subject(scene)
+    before = snapshot()
     if lab == "BL-001":
         obj.modifiers[0].width = .08 * value
     elif lab == "BL-002":
@@ -298,7 +368,15 @@ def apply_value(scene, value):
     elif lab in ('BL-007', 'BL-008', 'BL-009'):
         from . import authoring
         authoring.apply(scene, lab, value)
+    elif lab in ADAPTERS:
+        from . import controls
+        params = controls.scalar_parameters(lab, value)
+        adapter(lab).apply_controls(scene, lab, params)
+        scene['blender_lab_controls'] = json.dumps(params, sort_keys=True, allow_nan=False)
+        controls.expose(scene, lab, params)
     scene["blender_lab_value"] = value
+    if scene.get('blender_lab_assets'):
+        track_new_assets(scene, before)
     bpy.context.view_layer.update()
 
 

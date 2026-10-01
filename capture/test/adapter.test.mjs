@@ -11,7 +11,9 @@ import { connectAdapter, decodeReplay, encodeReplay, runBlender, scenarios, vali
 const recipe = { format: 'blender-lab-recipe-v1', lab: 'BL-001', value: 1.25 };
 
 test('all implemented recipes, numeric parameter validation and digest verification', async () => {
-  assert.equal(scenarios.length, 9);
+  const catalog = JSON.parse(await readFile(new URL('../../catalog.json', import.meta.url), 'utf8'));
+  assert.deepEqual(new Set(scenarios.map(s => s.id.toUpperCase())),
+    new Set(catalog.experiments.filter(entry => entry.implementation === 'implemented').map(entry => entry.id)));
   for (const lab of scenarios) assert.equal(validateRecipe({ ...recipe, lab: lab.id.toUpperCase() }).lab, lab.id.toUpperCase());
   for (const value of [NaN, Infinity, '1', 0, 2.1, 4]) assert.throws(() => validateRecipe({ ...recipe, value }));
   for (const value of [0.1, 2]) assert.equal(validateRecipe({ ...recipe, value }).value, value);

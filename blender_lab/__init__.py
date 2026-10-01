@@ -5,7 +5,7 @@ bl_info = {"name": "Blender Lab", "author": "Devin Thomas", "version": (0, 1, 0)
 import bpy
 from bpy.props import BoolProperty, EnumProperty, FloatProperty, IntProperty, StringProperty
 from textwrap import wrap
-from . import catalog, labs
+from . import catalog, controls, labs
 from .operations import Request, perform
 
 
@@ -35,12 +35,15 @@ class BLENDERLAB_OT_open(bpy.types.Operator):
 
 class BLENDERLAB_OT_apply(bpy.types.Operator):
     bl_idname = "blender_lab.apply"
-    bl_label = "Apply experiment value"
+    bl_label = "Apply controls"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
-        perform(Request('apply', context.scene['blender_lab_id'], context.scene.blender_lab_value_control,
-                        scene_id=context.scene['blender_lab_instance_id']), context.scene)
+        import json
+        lab = context.scene['blender_lab_id']
+        typed = json.dumps(controls.pending(context.scene, lab)) if lab in labs.ADAPTERS else ''
+        perform(Request('apply', lab, context.scene.blender_lab_value_control,
+                        scene_id=context.scene['blender_lab_instance_id'], controls_json=typed), context.scene)
         self.report({'INFO'}, "Applied to the editable scene")
         return {'FINISHED'}
 
@@ -141,9 +144,16 @@ class BLENDERLAB_PT_catalog(bpy.types.Panel):
             for sentence in labs.LABS[lab][1].split('. '):
                 for line in wrap(sentence, width=34):
                     box.label(text=line)
-            box.prop(scene, "blender_lab_value_control", text="Experiment value")
+            if lab in labs.ADAPTERS:
+                for item in catalog.BY_ID[lab]['controls']:
+                    box.prop(scene, '["' + controls.property_name(item['name']) + '"]', text=item['name'])
+                    if item['type'] == 'enum':
+                        box.label(text=' / '.join(item['options']))
+            else:
+                box.prop(scene, "blender_lab_value_control", text="Experiment value")
             box.operator("blender_lab.apply")
-            box.label(text=f"Applied: {scene.get('blender_lab_value', 1):.2f}")
+            if lab not in labs.ADAPTERS:
+                box.label(text=f"Applied: {scene.get('blender_lab_value', 1):.2f}")
             box.operator("blender_lab.reset", icon='FILE_REFRESH')
             if lab == "BL-006":
                 box.prop(scene, "blender_lab_output", text="Output folder")

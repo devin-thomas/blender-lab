@@ -2,7 +2,7 @@
 
 This is a lab-owned Blender adapter for the released **@uppercut-labs/cappy 0.1.0** controller. The package bundles the official Cappy agent skill at `node_modules/@uppercut-labs/cappy/.agents/skills/cappy/SKILL.md`. The unscoped npm package `cappy` belongs to a different project; do not install it.
 
-Cappy owns launch, session storage, replay handoff, OBS recording and media processing. Blender Lab owns nine implemented experiments and their verification. This adapter implements Cappy's version 1 loopback WebSocket protocol. Planned atlas entries are not runnable recipes.
+Cappy owns launch, session storage, replay handoff, OBS recording and media processing. Blender Lab owns 26 implemented experiments and their verification. This adapter implements Cappy's version 1 loopback WebSocket protocol. Planned atlas entries are not runnable recipes.
 
 ## Install and inspect
 
@@ -15,7 +15,7 @@ npm run scenarios
 npm run doctor
 ```
 
-`scenarios` negotiates with the released Cappy CLI and lists `bl-001` through `bl-009`. Cappy requires lowercase identifiers; Blender cards/Python use uppercase `BL-001` through `BL-009`.
+`scenarios` negotiates with the released Cappy CLI and lists the 26 implemented IDs. Cappy requires lowercase identifiers; Blender cards/Python use uppercase IDs such as `BL-001`.
 
 The npm scripts use the checked-in portable `cappy.config.example.json` explicitly. For customized direct CLI commands, copy that file to the ignored `cappy.config.json`, or keep passing `--config cappy.config.example.json`.
 
@@ -37,7 +37,7 @@ Use the actual installed path. These commands do not install Blender, OBS or FFm
 
 ## What verification proves
 
-`npm run verify` lists nine scenarios, records a scripted recipe for each, then invokes `cappy replay <session-id> --no-capture`. Both launch real Blender with background/factory startup, disabled autoexec and Python failure propagation. Each verifies value1.25, saves its blend and requires fresh matching evidence.
+`npm run verify` lists 26 scenarios, records a scripted recipe for each, then invokes `cappy replay <session-id> --no-capture`. Both launch real Blender with background/factory startup, disabled autoexec and Python failure propagation. Each verifies value1.25, saves its blend and requires fresh matching evidence.
 
 The adapter stores small SHA-256 checked inline recipes containing only format, lab ID and numeric parameter. Replaying rebuilds and verifies that same configuration. It does **not** record arbitrary mouse/keyboard editing or promise byte-identical Blender files or rigid-body solver output across versions. It deliberately does not advertise `deterministic_replay`.
 
@@ -50,7 +50,7 @@ npx cappy replay <returned-session-id> --no-capture -C . --config cappy.config.e
 
 `BLENDER_LAB_SCENARIO` defaults to `BL-001`; `BLENDER_LAB_VALUE` defaults to `1`. Supported values are finite numbers from `0.1` to `2`, matching Blender's panel control. The scenario protocol accepts a `value` parameter with that same range. Unknown parameters, presentation overrides, invalid replay digests and failed Blender checks return structured failures. Heartbeats remain responsive during the Blender process; cancel stops it. A 120-second timeout also stops Blender, escalating to forced termination after two seconds if needed. The adapter waits for process exit and closed output pipes before writing its log. An early stop fails rather than declaring an unfinished lab verified.
 
-The advertised capabilities are `scenarios` (nine parameterized recipes), `freeform_recording` (Cappy's session lifecycle for one automatically completed recipe), and `replay` (rebuild and verify). Arbitrary UI editing, deterministic cross-runtime replay, time scaling, alternate cameras, seeking and snapshots are not implemented.
+The advertised capabilities are `scenarios` (26 parameterized recipes), `freeform_recording` (Cappy's session lifecycle for one automatically completed recipe), and `replay` (rebuild and verify). Arbitrary UI editing, deterministic cross-runtime replay, time scaling, alternate cameras, seeking and snapshots are not implemented.
 
 Output is local and ignored: `.cappy/sessions/` contains sessions/recipes/timelines; `../build/cappy/` contains scenes/evidence/logs. `verification.json` records host, package version, session IDs and evidence after every implemented scenario passes. Do not commit generated artifacts.
 
@@ -61,3 +61,5 @@ This adapter currently launches Blender in background mode. Its timeline measure
 A future visible adapter must prepare the same scene inside Blender, signal ready only when the intended view is visible, apply the parameter when Cappy starts, and report events when they actually appear. Then the user must have a running OBS and confirm an existing scene shows only the intended Blender window before the first recording. The official Cappy skill says never to create, edit or switch OBS scenes/settings on the user's behalf; preserve this boundary. Keep any OBS WebSocket password only in an environment variable, never in config, logs or Git.
 
 The protocol tests use an explicitly injected mock lab runner. They prove handshake, immediate post-welcome requests, parameter validation, heartbeat, scenario/replay lifecycle, digest validation, failure propagation and cancellation. Only `npm run verify` with the real Blender executable establishes Blender playback acceptance, and neither check establishes screen capture acceptance.
+
+The 17 newer adapters map the recipe scalar to their first numeric control, or an enum choice when no numeric control exists. Typed control maps and complete per-control replay are outside Cappy v1. See [operations](../docs/OPERATIONS.md) for the mapping and [build status](../docs/BUILD_STATUS.md) for actually executed recipe qualification.

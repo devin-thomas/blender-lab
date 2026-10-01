@@ -1529,9 +1529,9 @@
       "mechanism": "Armature bones, deform vertex groups and evaluated Armature modifier.",
       "control": "Bend angle",
       "card": "docs/experiments/BL-010.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Armature",
         "bpy.types.ArmatureModifier",
@@ -1618,7 +1618,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -1650,9 +1650,9 @@
       "mechanism": "Actions, action slots, NLA tracks/strips and bounded blend evaluation.",
       "control": "Blend frames",
       "card": "docs/experiments/BL-011.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Action",
         "bpy.types.NlaTrack",
@@ -1739,7 +1739,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -1771,9 +1771,9 @@
       "mechanism": "Explicit camera transforms, perspective/orthographic projection, clipping and composition guides.",
       "control": "Field of view",
       "card": "docs/experiments/BL-012.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Camera",
         "mathutils.Matrix",
@@ -1860,7 +1860,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -1892,9 +1892,9 @@
       "mechanism": "Surface point distribution, seed-driven instances and explicit realization/export boundary.",
       "control": "Density",
       "card": "docs/experiments/BL-013.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.GeometryNodeDistributePointsOnFaces",
         "bpy.types.GeometryNodeInstanceOnPoints",
@@ -1980,7 +1980,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2012,9 +2012,9 @@
       "mechanism": "Named attributes and Evaluate on Domain with output samples mapped to visible colors.",
       "control": "Domain",
       "card": "docs/experiments/BL-014.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.GeometryNodeStoreNamedAttribute",
         "bpy.types.GeometryNodeFieldOnDomain",
@@ -2105,7 +2105,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2137,9 +2137,9 @@
       "mechanism": "UV loop coordinates, geometric face area and texture-size-aware density/margin measurements.",
       "control": "Target density",
       "card": "docs/experiments/BL-015.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.MeshUVLoopLayer",
         "bpy.types.MeshPolygon",
@@ -2225,7 +2225,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2622,9 +2622,9 @@
       "mechanism": "Scene compositor nodes, explicit image inputs and color-managed output.",
       "control": "Treatment amount",
       "card": "docs/experiments/BL-019.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.CompositorNodeTree",
         "bpy.types.NodeTree",
@@ -2643,7 +2643,7 @@
         },
         {
           "name": "Output width",
-          "type": "number",
+          "type": "integer",
           "default": 800,
           "range": "320..1280 pixels",
           "purpose": "Measure presentation scale.",
@@ -2710,7 +2710,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2742,9 +2742,9 @@
       "mechanism": "Explicit light datablocks, world shader and matched Cycles/Eevee comparison.",
       "control": "Key energy",
       "card": "docs/experiments/BL-020.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Light",
         "bpy.types.World",
@@ -2834,7 +2834,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2866,9 +2866,9 @@
       "mechanism": "Asset-marked object/material datablocks, previews and a local asset library path.",
       "control": "Asset role",
       "card": "docs/experiments/BL-021.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.AssetMetaData",
         "bpy.types.ID.asset_mark",
@@ -2890,7 +2890,7 @@
         },
         {
           "name": "Preview size",
-          "type": "number",
+          "type": "integer",
           "default": 128,
           "range": "64..256 pixels",
           "purpose": "Bound thumbnail work.",
@@ -2958,7 +2958,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -2990,9 +2990,9 @@
       "mechanism": "Orthographic animation rendering, alpha output and frame-to-atlas packing manifest.",
       "control": "Frames",
       "card": "docs/experiments/BL-022.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Camera",
         "bpy.types.RenderSettings",
@@ -3011,7 +3011,7 @@
         },
         {
           "name": "Cell size",
-          "type": "number",
+          "type": "integer",
           "default": 128,
           "range": "32..256 pixels",
           "purpose": "Bound sprite coverage.",
@@ -3080,7 +3080,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3366,9 +3366,9 @@
       "mechanism": "BMesh split/dissolve operations with face-loop and boundary validation.",
       "control": "Cut position",
       "card": "docs/experiments/BL-025.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bmesh.ops",
         "bmesh.types.BMesh",
@@ -3449,7 +3449,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3481,9 +3481,9 @@
       "mechanism": "Exact Boolean modifier with separate owned operands and evaluated topology checks.",
       "control": "Opening width",
       "card": "docs/experiments/BL-026.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.BooleanModifier",
         "bpy.types.Mesh",
@@ -3572,7 +3572,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3604,9 +3604,9 @@
       "mechanism": "Shrinkwrap modifier, explicit projection direction and measured cage-to-target distances.",
       "control": "Surface offset",
       "card": "docs/experiments/BL-027.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.ShrinkwrapModifier",
         "bpy.types.Mesh",
@@ -3625,7 +3625,7 @@
         },
         {
           "name": "Cage density",
-          "type": "number",
+          "type": "integer",
           "default": 8,
           "range": "4..24 divisions",
           "purpose": "Bound editable topology.",
@@ -3692,7 +3692,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3724,9 +3724,9 @@
       "mechanism": "Mesh attributes with explicit domain/type/cardinality contracts and controlled migration.",
       "control": "Attribute domain",
       "card": "docs/experiments/BL-028.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Attribute",
         "bpy.types.AttributeGroupMesh",
@@ -3818,7 +3818,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3850,9 +3850,9 @@
       "mechanism": "Relative shape keys with topology identity and evaluated displacement checks.",
       "control": "Expression weight",
       "card": "docs/experiments/BL-029.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Key",
         "bpy.types.ShapeKey",
@@ -3938,7 +3938,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3970,9 +3970,9 @@
       "mechanism": "Curve splines, bevel/profile geometry and conversion of a separate evaluated copy.",
       "control": "Path resolution",
       "card": "docs/experiments/BL-030.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Curve",
         "bpy.types.Spline",
@@ -4058,7 +4058,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4090,9 +4090,9 @@
       "mechanism": "Text Curve datablock, alignment/extrusion and explicit font dependency.",
       "control": "Extrusion",
       "card": "docs/experiments/BL-031.md",
-      "implementation": "specified",
-      "verification": "not-run",
-      "evidence": "docs/BUILD_STATUS.md",
+      "implementation": "implemented",
+      "verification": "qualification-pending",
+      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
       "api_leads": [
         "bpy.types.Curve",
         "bpy.types.VectorFont",
@@ -4179,7 +4179,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
