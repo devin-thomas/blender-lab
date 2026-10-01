@@ -100,12 +100,70 @@ def _case_metrics(scene, lab, output):
     return metrics
 
 
+def _feature_regressions(scene, lab, output, defaults):
+    if lab == 'BL-016':
+        from blender_lab import surfaces
+        image = surfaces._owned_image(scene, 'bake_image')
+        pixels = surfaces._pixels(image)
+        owner = bpy.data.materials.new('User-owned shared bake image sentinel')
+        owner.use_nodes = True
+        owner.node_tree.nodes.new('ShaderNodeTexImage').image = image
+        old_name = image.name
+        try:
+            _apply(scene, lab, defaults)
+            verification.check(surfaces._owned_image(scene, 'bake_image') != image
+                               and image.users > 0 and surfaces._pixels(image) == pixels,
+                               'Bake replacement changed or duplicated a shared image')
+            _apply(scene, lab, defaults)
+            verification.verify(scene, output)
+        finally:
+            bpy.data.materials.remove(owner)
+            labs.remove_unused({'images': [old_name]})
+        return {'shared_bake_image_replacement': 'passed'}
+    if lab == 'BL-035':
+        obj = labs.subject(scene)
+        graph = obj.modifiers[-1].node_group
+        baseline = verification.verify(scene, output)
+        count = next(socket for socket in graph.interface.items_tree
+                     if getattr(socket, 'identifier', None) == graph['blender_lab_count_identifier'])
+        graph.interface.move(count, 0)
+        graph.interface_update(bpy.context)
+        _apply(scene, lab, defaults)
+        after = verification.verify(scene, output)
+        verification.check(all(after[key] == baseline[key] for key in ('evaluated_vertices', 'measured_width', 'bounds')),
+                           'Socket display reordering changed the identifier-based recipe')
+        return {'socket_display_reorder': 'passed'}
+    if lab == 'BL-036':
+        from blender_lab import surfaces
+        material = surfaces._role(scene, 'migration_subject').data.materials[0]
+        graph = material.node_tree
+        link = next(link for link in graph.links if link.to_socket == graph.nodes['Principled BSDF'].inputs['Base Color'])
+        source, target = link.from_socket, link.to_socket
+        graph.links.remove(link)
+        before = _admission_state(scene)
+        try:
+            try:
+                _apply(scene, lab, defaults)
+            except (AssertionError, ValueError):
+                pass
+            else:
+                raise AssertionError('Migration admitted an unsupported current graph')
+            verification.check(_admission_state(scene) == before,
+                               'Rejected migration leaked staging data or changed applied controls')
+        finally:
+            graph.links.new(source, target)
+        verification.verify(scene, output)
+        return {'unsupported_migration_without_staging_leak': 'passed'}
+    return {}
+
+
 def _typed_test(scene, lab, output, request, receipt, sentinel, original_scene):
     requested = json.loads(scene['blender_lab_controls'])
     defaults = controls.validate(lab)
     schema = catalog.BY_ID[lab]['controls']
     _apply(scene, lab, defaults)
     baseline = _case_metrics(scene, lab, output)
+    feature_regressions = _feature_regressions(scene, lab, output, defaults)
     before = _admission_state(scene)
     verification.check(perform(request) == receipt and _admission_state(scene) == before,
                        'Repeated typed request produced duplicate scene state')
@@ -190,7 +248,7 @@ def _typed_test(scene, lab, output, request, receipt, sentinel, original_scene):
     labs.remove_unused(old_assets)
     _apply(scene, lab, requested)
     metrics = verification.verify(scene, output)
-    return scene, metrics, {'default_metrics': baseline, 'control_cases': cases,
+    return scene, metrics, {'default_metrics': baseline, 'feature_regressions': feature_regressions, 'control_cases': cases,
                             'rejected_inputs': rejection_records, 'partial_merge': 'passed',
                             'owned_and_shared_sentinels': 'passed', 'reset_defaults': 'passed',
                             'fresh_process_reopen': 'requires-wave-or-reopen-check'}

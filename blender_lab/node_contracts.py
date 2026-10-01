@@ -11,6 +11,7 @@ import bpy
 _LABS = {'BL-033', 'BL-035'}
 _REPEAT_DEFAULTS = {'Iterations': 4, 'Step offset': 0.2}
 _INTERFACE_DEFAULTS = {'Width': 1.0, 'Count': 3}
+_MODULE_HEIGHT = 0.16
 _REPEAT_STATE = 'tower_state_geometry'
 _REPEAT_IDS = {'Iterations': 'blender_lab_repeat_iterations_identifier',
                'Step offset': 'blender_lab_repeat_step_identifier'}
@@ -139,14 +140,14 @@ def _repeat_graph(material):
     input_node = _node(group, 'NodeGroupInput', 'Repeat controls', (-900, 200))
     output_node = _node(group, 'NodeGroupOutput', 'Tower output', (900, 200))
     seed = _node(group, 'GeometryNodeMeshCube', 'Initial tower module', (-900, -150))
-    seed.inputs['Size'].default_value = (0.42, 0.42, 0.2)
+    seed.inputs['Size'].default_value = (0.42, 0.42, _MODULE_HEIGHT)
     seed_material = _node(group, 'GeometryNodeSetMaterial', 'Copper ceramic module', (-660, -150))
     seed_material.inputs['Material'].default_value = material
     repeat_in = _node(group, 'GeometryNodeRepeatInput', 'Repeat input / state', (-380, 260))
     repeat_out = _node(group, 'GeometryNodeRepeatOutput', 'Repeat output / state', (680, 260))
     repeat_in.pair_with_output(repeat_out)
     template = _node(group, 'GeometryNodeMeshCube', 'One new tower module', (-300, -170))
-    template.inputs['Size'].default_value = (0.42, 0.42, 0.2)
+    template.inputs['Size'].default_value = (0.42, 0.42, _MODULE_HEIGHT)
     module_material = _node(group, 'GeometryNodeSetMaterial', 'Module material', (-80, -170))
     module_material.inputs['Material'].default_value = material
     multiply = _node(group, 'ShaderNodeMath', 'Iteration times step', (-300, -450))
@@ -348,7 +349,7 @@ def build(scene, lab, base_subject):
     guarded = _protected_scene_state(scene, base_subject)
     material = _material(lab + ' / copper ceramic')
     if lab == 'BL-033':
-        obj = _cube(scene, 'Repeat machine / editable subject', (0.42, 0.42, 0.2), material)
+        obj = _cube(scene, 'Repeat machine / editable subject', (0.42, 0.42, _MODULE_HEIGHT), material)
         group = _repeat_graph(material)
         _attach(obj, group, 'Repeat machine / paired state')
     else:
@@ -463,14 +464,14 @@ def _verify_repeat(scene, params, obj):
     _check(measure['vertices'] == expected_modules * 8 and measure['faces'] == expected_modules * 6,
            'Repeat zone produced an unexpected module count')
     z_extent = measure['bounds'][2][1] - measure['bounds'][2][0]
-    expected_z = 0.2 + params['Iterations'] * params['Step offset']
+    expected_z = _MODULE_HEIGHT + params['Iterations'] * params['Step offset']
     _check(abs(z_extent - expected_z) < 1e-5, 'Repeat zone vertical extent does not match its iteration state')
     if params['Iterations'] == 0:
-        _check(abs(z_extent - 0.2) < 1e-5, 'Zero iterations changed the initial module')
+        _check(abs(z_extent - _MODULE_HEIGHT) < 1e-5, 'Zero iterations changed the initial module')
     _ensure_protected_unchanged(scene, json.loads(scene['node_contract_protected_scene']))
     return {'module_count': expected_modules, 'evaluated_vertices': measure['vertices'],
             'evaluated_faces': measure['faces'], 'bounds': measure['bounds'],
-            'zero_iteration_identity': params['Iterations'] != 0 or abs(z_extent - 0.2) < 1e-5,
+            'zero_iteration_identity': params['Iterations'] != 0 or abs(z_extent - _MODULE_HEIGHT) < 1e-5,
             'paired_state_sockets': True}
 
 

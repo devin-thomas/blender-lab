@@ -10,6 +10,8 @@ Continue to BL-007 for a modular doorway/wall/stair kit, BL-008 for identical ge
 
 The authoring route continues through BL-010..015 for rigging, Actions/NLA, staging, procedural scattering/fields and UV audits; BL-019..022 for compositor, lighting, assets and sprites; and BL-025..031 for topology, Boolean, projection, attribute, shape-key, curve and typography work. These adapters expose two declared controls each. Change one at a time, inspect its evaluated result and consult its remaining gates. [Typed CLI and waves](OPERATIONS.md#typed-authoring-controls-and-waves) show how to reproduce bounded configurations.
 
+The next route adds BL-016 baking; BL-033/035 repeat zones and stable node interfaces; BL-036 graph migration; BL-037..040 drivers, IK, pose assets and visual-key baking; and BL-058/059 world lighting and procedural materials. These ten have background qualification; native editor acceptance remains open.
+
 Save a separate copy before freeform edits. Open experiment creates a new scene. Apply controls changes the active lab. Reset this lab asks for confirmation and restores that active lab's scripted baseline, discarding its edits while preserving other scenes. Working artists can preserve a variation in their own file before reset.
 
 ## Source workflow

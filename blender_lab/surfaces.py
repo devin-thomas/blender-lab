@@ -120,23 +120,60 @@ def _new_principled(name, color=(.76, .31, .09), roughness=.8):
     return material, shader
 
 
-def _uv_subject(obj):
+def _uv_box(obj):
+    """Create separate planar UV islands for each side of the original mesh."""
     mesh = obj.data
-    _check(obj.type == 'MESH' and len(mesh.polygons) > 0, 'Surface fixture requires a nonempty mesh subject')
+    _check(obj.type == 'MESH' and len(mesh.polygons) > 0,
+           'UV box projection requires a nonempty mesh subject')
+    mesh.update()
     uv = mesh.uv_layers.get('BL UV') or mesh.uv_layers.new(name='BL UV')
     face_count = len(mesh.polygons)
     columns = max(1, math.ceil(math.sqrt(face_count)))
     rows = max(1, math.ceil(face_count / columns))
+    inset = .07
     for face_index, polygon in enumerate(mesh.polygons):
+        drop_axis = max(range(3), key=lambda axis: abs(polygon.normal[axis]))
+        axes = [axis for axis in range(3) if axis != drop_axis]
+        points = [mesh.vertices[mesh.loops[index].vertex_index].co for index in polygon.loop_indices]
+        limits = [(min(point[axis] for point in points), max(point[axis] for point in points)) for axis in axes]
+        _check(all(high - low > 1e-8 for low, high in limits),
+               'UV box projection found a degenerate face')
         column, row = face_index % columns, face_index // columns
-        count = len(polygon.loop_indices)
-        for corner, loop_index in enumerate(polygon.loop_indices):
-            angle = 2 * math.pi * corner / count
-            u = (column + .5 + .42 * math.cos(angle)) / columns
-            v = (row + .5 + .42 * math.sin(angle)) / rows
+        for loop_index, point in zip(polygon.loop_indices, points):
+            values = [min(1.0, max(0.0, (point[axis] - low) / (high - low)))
+                      for axis, (low, high) in zip(axes, limits)]
+            u = (column + inset + values[0] * (1 - 2 * inset)) / columns
+            v = (row + inset + values[1] * (1 - 2 * inset)) / rows
             uv.data[loop_index].uv = (u, v)
     mesh.uv_layers.active = uv
     return uv
+
+
+def _uv_box_metrics(obj):
+    uv = obj.data.uv_layers.active
+    _check(uv is not None and uv.name == 'BL UV', 'Fixture is missing its active BL UV map')
+    areas, bounds = [], []
+    for polygon in obj.data.polygons:
+        points = [uv.data[index].uv for index in polygon.loop_indices]
+        area = abs(sum(points[index].x * points[(index + 1) % len(points)].y
+                       - points[(index + 1) % len(points)].x * points[index].y
+                       for index in range(len(points))) * .5)
+        _check(area > 1e-8, 'Fixture contains a zero-area UV face')
+        areas.append(float(area))
+        bounds.append([float(min(point[0] for point in points)), float(max(point[0] for point in points)),
+                       float(min(point[1] for point in points)), float(max(point[1] for point in points))])
+    for index, left in enumerate(bounds):
+        for right in bounds[index + 1:]:
+            overlap_u = min(left[1], right[1]) - max(left[0], right[0])
+            overlap_v = min(left[3], right[3]) - max(left[2], right[2])
+            _check(overlap_u <= 1e-7 or overlap_v <= 1e-7,
+                   'Generated face UV islands overlap')
+    return {'active_uv_layer': uv.name, 'face_count': len(areas),
+            'uv_face_areas': areas, 'uv_face_bounds': bounds}
+
+
+def _uv_subject(obj):
+    return _uv_box(obj)
 
 
 def _copy_subject(scene, source, role, name, x):
@@ -358,6 +395,8 @@ def _apply_bake(scene, params):
             view_layer.objects.active = old_active
     if previous_image != image and previous_image.get(_ROLE_KEY) == 'bake_image' and previous_image.users == 0:
         bpy.data.images.remove(previous_image)
+    elif previous_image != image and previous_image.get(_ROLE_KEY) == 'bake_image':
+        previous_image[_ROLE_KEY] = 'bake_image_retained'
     image[_ROLE_KEY] = 'bake_image'
     _tag(image, scene, 'bake_image')
     scene['surface_bake_image'] = image.name
@@ -451,6 +490,7 @@ def _migration_fixture(scene, base_subject):
     subject.name = 'Graph migration / original v1 subject'
     _private_mesh(scene, subject, 'migration_subject')
     _tag(subject, scene, 'migration_subject')
+    _uv_box(subject)
     image = _image_fixture(scene, 'migration_image', 'BL-036 original packed UV texture')
     material, shader = _new_principled('BL-036 material schema v1')
     tree = material.node_tree
@@ -541,20 +581,33 @@ def _migration_apply(scene, params):
             bpy.data.materials.remove(previous)
         return
     current = subject.data.materials[0]
-    if _schema(current) == 2:
-        stage = current.copy()
-        stage.use_fake_user = False
-        stage.name = 'BL-036 staged schema v2 update'
-        mix = stage.node_tree.nodes.get('V2 tint contribution')
-        _check(mix is not None and mix.bl_idname == 'ShaderNodeMixRGB',
+    current_version = _schema(current)
+    if current_version == 2:
+        existing_mix = current.node_tree.nodes.get('V2 tint contribution')
+        _check(existing_mix is not None and existing_mix.bl_idname == 'ShaderNodeMixRGB',
                'Current v2 graph is unsupported; original v1 remains available')
-        mix.inputs['Fac'].default_value = tint
+        _validate_v2(current, float(existing_mix.inputs['Fac'].default_value))
     else:
+        _check(current_version == 1, 'Unknown graph schema blocks automatic mutation')
         _validate_v1(current)
-        stage = _migrate_v1(current, tint)
-    _tag(stage, scene, 'migration_v2_material')
-    _validate_v2(stage, tint)
-    subject.data.materials[0] = stage
+
+    stage = None
+    committed = False
+    try:
+        if current_version == 2:
+            stage = current.copy()
+            stage.use_fake_user = False
+            stage.name = 'BL-036 staged schema v2 update'
+            stage.node_tree.nodes['V2 tint contribution'].inputs['Fac'].default_value = tint
+        else:
+            stage = _migrate_v1(current, tint)
+        _tag(stage, scene, 'migration_v2_material')
+        _validate_v2(stage, tint)
+        subject.data.materials[0] = stage
+        committed = True
+    finally:
+        if not committed and stage is not None and stage.users == 0:
+            bpy.data.materials.remove(stage)
     if current != stage and current.get(_ROLE_KEY) == 'migration_v2_material' and current.users == 0:
         bpy.data.materials.remove(current)
 
@@ -589,6 +642,7 @@ def _migration_verify(scene, params):
     _check(_schema(material) == version, 'Selected schema version is not the assigned graph version')
     original = _owned_material(scene, 'migration_v1_material')
     _check(_schema(original) == 1, 'Original v1 recovery graph was not retained')
+    uv_metrics = _uv_box_metrics(subject)
     if version == 1:
         tex, shader, sentinel = _validate_v1(material)
         strength = 0.0
@@ -599,14 +653,39 @@ def _migration_verify(scene, params):
         strength = float(mix.inputs['Fac'].default_value)
     image = tex.image
     _check(image is not None and image.packed_file is not None, 'Migration lost its packed original image dependency')
-    samples = _sample_pixels(image, ((.2, .5), (.5, .5), (.8, .5)))
+    reference_uv = ((.167, .3), (.5, .3), (.833, .3),
+                    (.167, .7), (.5, .7), (.833, .7))
+    samples = _sample_pixels(image, reference_uv)
     tint = [float(value) for value in material.node_tree.nodes.get('V2 tint contribution').inputs[2].default_value[:3]] if version == 2 else None
     migrated = [[(1 - strength) * channel + strength * target for channel, target in zip(pixel, tint)]
                 for pixel in samples] if version == 2 else samples
-    preview_digest, tint_effect = None, None
+    deadline = time.monotonic() + 180
+    _, _, preview = _render_probe(scene, deadline)
+    tree = material.node_tree
+    color_input = mix.inputs[1] if mix is not None else shader.inputs['Base Color']
+    texture_link = next((link for link in tree.links
+                         if link.from_socket == tex.outputs['Color'] and link.to_socket == color_input), None)
+    _check(texture_link is not None, 'Original packed image does not feed the rendered material patch')
+    old_color = tuple(color_input.default_value)
+    try:
+        tree.links.remove(texture_link)
+        color_input.default_value = (.45, .45, .45, 1.0)
+        _, _, flat_preview = _render_probe(scene, deadline)
+    finally:
+        color_input.default_value = old_color
+        tree.links.new(tex.outputs['Color'], color_input)
+    texture_effect = _pixel_difference(preview, flat_preview)
+    texture_visibility = 'masked-by-full-tint' if version == 2 and strength >= 1 - 1e-6 else 'measured'
+    if texture_visibility == 'masked-by-full-tint':
+        _check(texture_effect['mean_absolute_channel_difference'] <= 1e-6,
+               'Full tint should mask the packed texture contribution')
+    else:
+        _check(texture_effect['mean_absolute_channel_difference'] > 1e-6,
+               'Packed UV image did not change rendered pixels on the migration fixture')
+    preview_digest = hashlib.sha256(preview.tobytes()).hexdigest()
+    preview_stats = _pixel_metrics(96, 72, preview)
+    tint_effect = None
     if mix is not None:
-        deadline = time.monotonic() + 180
-        _, _, preview = _render_probe(scene, deadline)
         original_strength = float(mix.inputs['Fac'].default_value)
         try:
             mix.inputs['Fac'].default_value = 0.0 if original_strength > 0 else 1.0
@@ -616,12 +695,15 @@ def _migration_verify(scene, params):
         tint_effect = _pixel_difference(preview, alternate)
         _check(tint_effect['mean_absolute_channel_difference'] > 1e-6,
                'V2 tint did not change bounded rendered reference pixels')
-        preview_digest = hashlib.sha256(preview.tobytes()).hexdigest()
     return {'schema_version': version, 'source_image_dimensions': list(image.size),
             'source_image_packed': image.packed_file is not None, 'uv_input_connected': True,
+            'uv_layout': uv_metrics,
             'user_sentinel_value': float(sentinel.outputs[0].default_value),
-            'tint_strength': strength, 'reference_uv': [[.2, .5], [.5, .5], [.8, .5]],
+            'tint_strength': strength, 'reference_uv': [list(uv) for uv in reference_uv],
             'source_reference_rgb': samples, 'migrated_reference_rgb': migrated,
+            'rendered_textured_pixel_variance': preview_stats['preview_luminance_variance'],
+            'texture_render_difference': texture_effect,
+            'texture_visibility': texture_visibility,
             'base_color_reaches_surface': any(link.to_node.bl_idname == 'ShaderNodeOutputMaterial'
                                               for link in material.node_tree.links
                                               if link.from_node == shader),
@@ -801,7 +883,7 @@ def _procedural_material(scene, role, name, stone=False):
     combine = tree.nodes.new('ShaderNodeMixRGB')
     combine.name = 'Original copper and stone blend'
     combine.location = (30, 120)
-    combine.inputs['Fac'].default_value = .27 if stone else .16
+    combine.inputs['Fac'].default_value = .88 if stone else .16
     tree.links.new(coord.outputs['Generated'], noise.inputs['Vector'])
     tree.links.new(coord.outputs['Generated'], voronoi.inputs['Vector'])
     tree.links.new(noise.outputs['Fac'], noise_ramp.inputs['Fac'])
