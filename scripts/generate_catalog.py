@@ -331,11 +331,12 @@ def main():
     drift = []
     for relative, content in outputs(spec).items():
         path = ROOT / relative
-        if not path.is_file() or path.read_text(encoding="utf-8") != content:
+        encoded = content.encode('utf-8')
+        if not path.is_file() or path.read_bytes() != encoded:
             drift.append(relative)
             if not args.check:
                 path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text(content, encoding="utf-8")
+                path.write_bytes(encoded)
     if args.check and drift:
         raise SystemExit("Generated catalog drift:\n" + "\n".join(drift))
     print(f"{'Checked' if args.check else 'Generated'} 96 labs, 192 lab tickets, 16 core tickets and matrices; DAG valid")
