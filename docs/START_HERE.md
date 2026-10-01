@@ -8,6 +8,8 @@ Continue to BL-002 to inspect a pixel atlas and color attribute, then BL-003 to 
 
 Continue to BL-007 for a modular doorway/wall/stair kit, BL-008 for identical geometry under three shade models and BL-009 for editable atmosphere cards. Search/filter/page the full 96-entry atlas to find a domain. Planned cards display their status and fallback; only implemented adapters offer Open. Follow [milestones](MILESTONES.md) and [tickets](../tickets/README.md) to see what enables each future capability.
 
+The authoring route continues through BL-010..015 for rigging, Actions/NLA, staging, procedural scattering/fields and UV audits; BL-019..022 for compositor, lighting, assets and sprites; and BL-025..031 for topology, Boolean, projection, attribute, shape-key, curve and typography work. These adapters expose two declared controls each. Change one at a time, inspect its evaluated result and consult its remaining gates. [Typed CLI and waves](OPERATIONS.md#typed-authoring-controls-and-waves) show how to reproduce bounded configurations.
+
 Save a separate copy before freeform edits. Open experiment creates a new scene. Apply controls changes the active lab. Reset this lab asks for confirmation and restores that active lab's scripted baseline, discarding its edits while preserving other scenes. Working artists can preserve a variation in their own file before reset.
 
 ## Source workflow

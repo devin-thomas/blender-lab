@@ -37,8 +37,25 @@ Generated scenes, renders, exports, logs, and ZIPs remain local and ignored. The
 | BL-007 | Modular environment kit | Linked wall/corner/post meshes, doorway seams, packed atlas and stairs |
 | BL-008 | Vertex shade composition | Identical texture-only, vertex-unlit and vertex-lit fixtures |
 | BL-009 | Gradient-card atmosphere | Editable transparent gradient quads, alpha wiring and depth offsets |
+| BL-010 | Rig and deformation desk | Weighted and rigid limbs, bone weights and evaluated deformation |
+| BL-011 | Action and NLA bench | Slotted Actions, NLA blends and sampled motion |
+| BL-012 | Camera and staging lab | Gameplay/showcase cameras, projected motif size and coverage |
+| BL-013 | Geometry Nodes scatter | Seeded surface scattering and realized instance geometry |
+| BL-014 | Geometry Nodes field inspector | Named field values, domains and selection cardinality |
+| BL-015 | UV and texel audit | Measured UV density, stretch and island margins |
+| BL-019 | Compositor bench | Packed original chart, clean/treatment graph and pixel comparisons |
+| BL-020 | Lighting observatory | Light energy, renderer selection and neutral references; pixel parity pending |
+| BL-021 | Asset-browser kit | Marked assets, stable metadata, packed dependencies and custom thumbnails |
+| BL-022 | Sprite-sheet camera | Transparent sampled frames, PNG atlas order and alpha roundtrip |
+| BL-025 | Topology surgery | Editable BMesh cuts, limited dissolve and manifold checks |
+| BL-026 | Boolean assembly | Exact Boolean operations and evaluated volume |
+| BL-027 | Retopology projection desk | Editable projection cage and measured shrinkwrap target fit |
+| BL-028 | Mesh attribute contracts | Attribute type/domain cardinality and known samples |
+| BL-029 | Shape-key expression desk | Relative brow/mouth keys and evaluated offsets |
+| BL-030 | Curve path and profile forge | Editable curve sweep/profile and converted mesh copy |
+| BL-031 | Typography geometry desk | Bundled font, text fitting, extrusion and converted geometry |
 
-All 96 [workshop cards](docs/experiments/INDEX.md) specify controls, original fixtures, interactions, positive/negative checks, ownership, budgets and fallbacks. Explore the [capability matrix](docs/CAPABILITY_MATRIX.md), [milestones](docs/MILESTONES.md), [roadmap](docs/ROADMAP.md) and [dependency tickets](tickets/README.md). Rigging, sculpting, simulations, 2D, tracking, rendering, compositing, assets and connected automation remain visible delivery work; metadata does not claim an implemented adapter.
+All 96 [workshop cards](docs/experiments/INDEX.md) specify controls, original fixtures, interactions, positive/negative checks, ownership, budgets and fallbacks. Explore the [capability matrix](docs/CAPABILITY_MATRIX.md), [milestones](docs/MILESTONES.md), [roadmap](docs/ROADMAP.md) and [dependency tickets](tickets/README.md). Additional sculpting, baking, simulations, 2D/tracking, render profiles, interchange and connected services remain delivery work. Implemented cards retain open qualification gates; metadata does not establish full domain support.
 
 ## Build and extend
 
