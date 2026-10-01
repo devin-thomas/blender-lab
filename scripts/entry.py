@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 import bpy
 import blender_lab
 from blender_lab import labs, verification
+from blender_lab.operations import Request, perform
 
 
 def main():
@@ -24,20 +25,49 @@ def main():
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     blender_lab.register()
-    selected = [args.lab] if args.lab else list(labs.LABS)
+    if args.action == 'export' and args.lab and args.lab != 'BL-006':
+        parser.error('Verified glTF export is implemented only for BL-006')
+    selected = [args.lab] if args.lab else (['BL-006'] if args.action == 'export' else list(labs.LABS))
     source_hash = hashlib.sha256(b''.join(p.read_bytes() for p in sorted((ROOT / 'blender_lab').glob('*.py')))).hexdigest()
     report = {'schemaVersion': 1, 'blender': bpy.app.version_string, 'build_hash': bpy.app.build_hash.decode(),
-              'source_sha256': source_hash, 'timestamp': datetime.now(timezone.utc).isoformat(), 'action': args.action, 'labs': []}
+              'source_sha256': source_hash, 'catalog_sha256': hashlib.sha256((ROOT / 'catalog.json').read_bytes()).hexdigest(),
+              'timestamp': datetime.now(timezone.utc).isoformat(), 'action': args.action, 'labs': []}
     sentinel = bpy.data.objects.new("Acceptance sentinel", None)
     bpy.context.scene.collection.objects.link(sentinel)
     original_scene = bpy.context.scene
     for lab in selected:
-        scene = labs.build(lab)
-        labs.apply_value(scene, args.value)
+        request = Request('open', lab, args.value)
+        receipt = perform(request)
+        scene = bpy.context.scene
         lab_output = output if len(selected) == 1 else output / lab
         lab_output.mkdir(parents=True, exist_ok=True)
         metrics = verification.verify(scene, lab_output)
         if args.action == 'test':
+            scene_count = len(bpy.data.scenes)
+            verification.check(perform(request) == receipt and len(bpy.data.scenes) == scene_count,
+                               'Repeated request produced duplicate scene state')
+            for invalid in (True, float('nan'), 2.1):
+                try:
+                    perform(Request('apply', lab, invalid, scene_id=scene['blender_lab_instance_id']), scene)
+                except ValueError:
+                    pass
+                else:
+                    raise AssertionError('Invalid input was admitted by the operation boundary')
+            verification.check(scene['blender_lab_value'] == args.value, 'Rejected request mutated scene input')
+            for rejected in (Request('open', lab, 1.5, request_id=request.request_id),
+                             Request('apply', lab, 1.5, scene_id='different-instance'),
+                             Request('open', 'BL-096')):
+                try:
+                    perform(rejected, scene)
+                except ValueError:
+                    pass
+                else:
+                    raise AssertionError('Conflicting retry, wrong scope or planned adapter was admitted')
+            verification.check(scene['blender_lab_value'] == args.value and len(bpy.data.scenes) == scene_count,
+                               'Rejected request changed owned scene state')
+            for endpoint in (.1, 2.0):
+                perform(Request('apply', lab, endpoint, scene_id=scene['blender_lab_instance_id']), scene)
+                verification.verify(scene, lab_output)
             # Compare two controls against evaluated output, then exercise the UI operators.
             labs.apply_value(scene, .5)
             alternate = verification.verify(scene, lab_output)
@@ -58,7 +88,9 @@ def main():
             bpy.ops.render.render(write_still=True)
         path = lab_output / f'{lab}.blend'
         bpy.ops.wm.save_as_mainfile(filepath=str(path))
-        report['labs'].append({'id': lab, 'status': 'passed', 'value': args.value, 'metrics': metrics})
+        report['labs'].append({'id': lab, 'status': 'passed', 'value': args.value, 'metrics': metrics,
+                              'operation_request_id': json.loads(scene['blender_lab_receipt'])['request_id'],
+                              'open_request_id': receipt.request_id})
     (output / 'evidence.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report))
 

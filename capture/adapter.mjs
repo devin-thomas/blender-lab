@@ -9,6 +9,8 @@ export const scenarios = [
   ['BL-001', 'Mesh modelling'], ['BL-002', 'Pixel UV and vertex colour'],
   ['BL-003', 'Geometry nodes'], ['BL-004', 'Keyframe animation'],
   ['BL-005', 'Rigid body simulation'], ['BL-006', 'glTF roundtrip'],
+  ['BL-007', 'Modular environment kit'], ['BL-008', 'Vertex shade composition'],
+  ['BL-009', 'Gradient-card atmosphere'],
 ].map(([id, name]) => ({ id: id.toLowerCase(), name, parameters: { value: { type: 'number', minimum: 0.1, maximum: 2, default: 1 } }, requiredCapabilities: ['scenarios'] }));
 
 export function validateRecipe(recipe) {
@@ -45,7 +47,7 @@ export async function runBlender(recipe, { outputRoot, signal, executable = proc
   const output = path.join(outputRoot || path.join(root, 'build', 'cappy'), recipe.lab, crypto.randomUUID());
   await mkdir(output, { recursive: true });
   signal?.throwIfAborted();
-  const args = ['--background', '--factory-startup', '--python-exit-code', '1', '--python', path.join(root, 'scripts', 'entry.py'), '--', '--action', 'scenario', '--lab', recipe.lab, '--output', output, '--value', String(recipe.value)];
+  const args = ['--background', '--factory-startup', '--disable-autoexec', '--python-exit-code', '1', '--python', path.join(root, 'scripts', 'entry.py'), '--', '--action', 'scenario', '--lab', recipe.lab, '--output', output, '--value', String(recipe.value)];
   const child = spawnProcess(executable, args, { cwd: root, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
   const log = [];
   child.stdout.on('data', chunk => log.push(chunk));

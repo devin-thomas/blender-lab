@@ -22,7 +22,7 @@ async function command(args, env = {}) {
 
 const report = { host: process.platform, node: process.version, cappy: '@uppercut-labs/cappy@0.1.0', captured: false, checkedAt: new Date().toISOString(), labs: [] };
 const listed = await command(['scenarios']);
-if (listed.data.scenarios.length !== 6) throw new Error('Expected all six lab scenarios');
+if (listed.data.scenarios.length !== scenarios.length) throw new Error('Expected every implemented lab scenario');
 for (const { id: scenarioId } of scenarios) {
   const id = scenarioId.toUpperCase();
   console.error(`Verifying ${id} through Cappy record and replay --no-capture`);

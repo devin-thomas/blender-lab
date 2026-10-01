@@ -2,7 +2,7 @@
 
 **Make a thing. Change the mechanism. Inspect what survives.**
 
-Blender Lab is an editable capability workshop inside Blender. Six original retro-styled scenes introduce mesh construction, pixel-textured materials, Geometry Nodes, animation, rigid-body simulation, and glTF interchange. The scene, node tree, modifier stack, and timeline are the product: rendered previews help you see the result, and automated receipts explain what was checked.
+Blender Lab is an editable capability atlas inside Blender: **96 detailed experiment contracts**, **16 core infrastructure tickets** and **192 implementation/qualification tickets** cover Blender authoring and automation. Nine working original scenes currently exercise geometry, surfaces, procedural repetition, motion, simulation, interchange, modular environments, shader comparison and atmosphere. The scene, node tree, modifier stack and timeline are the product; measured receipts explain what actually ran.
 
 The first implementation targets Blender **5.2.2 LTS**. The add-on declares Blender 5.2 as its minimum; other releases remain unqualified until tested. Current execution evidence and remaining editor gates belong in [BUILD_STATUS](docs/BUILD_STATUS.md).
 
@@ -10,7 +10,7 @@ The first implementation targets Blender **5.2.2 LTS**. The add-on declares Blen
 
 1. Run `python scripts/package.py` to create the local add-on ZIP.
 2. In Blender, use Preferences > Add-ons > Install from Disk, select the generated ZIP, and enable Blender Lab.
-3. In the 3D Viewport, press **N**, open **Blender Lab**, choose a lab, and build its scene.
+3. In the 3D Viewport, press **N**, open **Blender Lab**, search/filter the atlas and build an available lab. Planned entries show their contract and status.
 4. Change Experiment value and click Apply experiment value, then inspect its objects, materials, modifiers, nodes, or timeline. Save your own `.blend` copy when you want to keep edits.
 
 [START_HERE](docs/START_HERE.md) explains the first journey and scripted workflow. Each Open experiment action creates a new separate scene. Apply experiment value changes the active lab; Reset this lab asks for confirmation and replaces only that active lab scene, discarding its edits.
@@ -24,7 +24,7 @@ python scripts/run.py --blender "C:\path\to\blender.exe" export
 
 Generated scenes, renders, exports, logs, and ZIPs remain local and ignored. The repository ships source and original procedural fixtures. No account, key, network service, or recording application is required for the workshop. Optional [capture tooling](docs/CAPTURE.md) supports documentation and analysis.
 
-## The first six labs
+## Implemented experiments
 
 | ID | Workshop | What you can inspect |
 |---|---|---|
@@ -34,11 +34,16 @@ Generated scenes, renders, exports, logs, and ZIPs remain local and ignored. The
 | BL-004 | Motion Signal | Editable keyframes and evaluated motion |
 | BL-005 | Gravity Bench | Active/passive rigid bodies and simulated positions |
 | BL-006 | Portable Artifact | Selected glTF export and reimport comparison |
+| BL-007 | Modular environment kit | Linked wall/corner/post meshes, doorway seams, packed atlas and stairs |
+| BL-008 | Vertex shade composition | Identical texture-only, vertex-unlit and vertex-lit fixtures |
+| BL-009 | Gradient-card atmosphere | Editable transparent gradient quads, alpha wiring and depth offsets |
 
-Each has a [workshop card](docs/experiments/INDEX.md) with a user payoff, mechanism, exercise, acceptance gate, and limitation. The [roadmap](docs/ROADMAP.md) specifies expansion opportunities without presenting them as shipped.
+All 96 [workshop cards](docs/experiments/INDEX.md) specify controls, original fixtures, interactions, positive/negative checks, ownership, budgets and fallbacks. Explore the [capability matrix](docs/CAPABILITY_MATRIX.md), [milestones](docs/MILESTONES.md), [roadmap](docs/ROADMAP.md) and [dependency tickets](tickets/README.md). Rigging, sculpting, simulations, 2D, tracking, rendering, compositing, assets and connected automation remain visible delivery work; metadata does not claim an implemented adapter.
 
 ## Build and extend
 
 Read [SPEC](docs/SPEC.md), [ARCHITECTURE](docs/ARCHITECTURE.md), [OPERATIONS](docs/OPERATIONS.md), [ART_DIRECTION](docs/ART_DIRECTION.md), and [TEST_STRATEGY](docs/TEST_STRATEGY.md). Builders follow [AGENTS](AGENTS.md) and the [extension contract](docs/EXTENSION_CONTRACT.md). [SOURCE_INDEX](docs/SOURCE_INDEX.md) records the research lineage and confidence boundaries; [ADR](docs/ADR.md) records decisions.
+
+Edit `specs/experiments.json`, then run `python scripts/generate_catalog.py`. Validate with `python scripts/package.py`, `python scripts/check.py` and `cd capture; npm test`. [Data contracts](docs/DATA_CONTRACTS.md), [profiles](docs/EXECUTION_PROFILES.md) and [automation surfaces](docs/AUTOMATION_SURFACES.md) distinguish the current runtime spine from planned services.
 
 Project source is [GPL-3.0-or-later](LICENSE), chosen for the Blender add-on. Independently supplied tools and assets retain their own licenses. No third-party game art is bundled; see [ASSET_POLICY](docs/ASSET_POLICY.md). This is an independent project, not endorsed by Blender or the games used as research references.

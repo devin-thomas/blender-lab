@@ -13,3 +13,5 @@ Keep core generation local. Optional external integrations require an adapter, e
 ## Contribution acceptance
 
 Update the catalog, card, sidebar/CLI wiring, relevant tests, source index, and evidence ledger together. Verify source packaging from a clean public-only checkout. Record the tested Blender version. For export-dependent features, define which properties survive and verify them in the receiving tool before claiming interchange success.
+
+Edit `specs/experiments.json` and regenerate cards/catalog/tickets with `scripts/generate_catalog.py`; do not hand-edit generated views. Preserve stable IDs and separate implementation/automated/editor/visual/downstream states. Add a real adapter before marking implemented and exposing Open. Use shared operations, instance ownership and bounded cleanup. For expensive jobs, implement the core budget/cache/cancellation prerequisites before declaring qualification. Review the primary API leads against the actual runtime rather than assuming existence implies outcome support.

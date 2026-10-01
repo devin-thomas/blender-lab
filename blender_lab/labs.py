@@ -1,6 +1,7 @@
 """Original, editable experiments. No imported art or external dependencies."""
 import math
 import json
+from uuid import uuid4
 import bpy
 from mathutils import Vector
 
@@ -11,6 +12,9 @@ LABS = {
     "BL-004": ("Motion Signal", "Change travel height. Scrub frames 1, 30 and 60; play the timeline."),
     "BL-005": ("Gravity Bench", "Change release height. Reset then play from frame 1 to see the fall."),
     "BL-006": ("Portable Artifact", "Change the artifact width. Export and reimport a selected mesh as glTF."),
+    "BL-007": ("Modular environment kit", "Change the wall span and doorway opening. Inspect linked wall, corner and stair meshes."),
+    "BL-008": ("Vertex shade composition", "Change shade strength. Compare the same beacon with texture, authored shades and restrained lighting."),
+    "BL-009": ("Gradient-card atmosphere", "Change gradient intensity. Orbit the portal to inspect authored contact and shaft cards."),
 }
 PALETTE = {"navy": (0.025, 0.08, 0.12, 1), "teal": (0.08, 0.55, 0.50, 1),
            "amber": (0.95, 0.48, 0.09, 1), "cream": (0.80, 0.87, 0.66, 1)}
@@ -86,6 +90,7 @@ def setup(lab):
     scene = bpy.data.scenes.new(f"Blender Lab | {LABS[lab][0]}")
     scene["blender_lab_id"] = lab
     scene["blender_lab_owned"] = True
+    scene["blender_lab_instance_id"] = str(uuid4())
     bpy.context.window.scene = scene
     scene.render.engine = "CYCLES"
     scene.cycles.samples = 16
@@ -244,10 +249,15 @@ def build(lab):
         scene.rigidbody_world.point_cache.frame_end = 90
     elif lab == "BL-006":
         pixel_surface(obj, portable=True)
+    elif lab in ('BL-007', 'BL-008', 'BL-009'):
+        from . import authoring
+        obj = authoring.build(scene, lab, obj)
     scene["blender_lab_subject_name"] = obj.name
     scene["blender_lab_value"] = 1.0
     activate(obj)
     apply_value(scene, 1.0)
+    if hasattr(scene, 'blender_lab_selected'):
+        scene.blender_lab_selected = lab
     scene["blender_lab_assets"] = json.dumps(created_since(before))
     return scene
 
@@ -285,6 +295,9 @@ def apply_value(scene, value):
                 bpy.ops.ptcache.free_bake()
     elif lab == "BL-006":
         obj.scale.x = value
+    elif lab in ('BL-007', 'BL-008', 'BL-009'):
+        from . import authoring
+        authoring.apply(scene, lab, value)
     scene["blender_lab_value"] = value
     bpy.context.view_layer.update()
 

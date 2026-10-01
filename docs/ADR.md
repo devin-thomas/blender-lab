@@ -10,7 +10,7 @@
 
 ## ADR-003 - Narrow first pipeline
 
-**Accepted:** ship six focused labs before expanding into every Blender subsystem. The first chain covers form, surface, repetition, motion, simulation, and interchange. Each future lab needs a real editable action and independent gate instead of a catalog-only claim.
+**Superseded by ADR-007:** the six-lab chain was a bootstrap. It remains useful evidence but was insufficient as the comprehensive product specification.
 
 ## ADR-004 - Version-specific qualification
 
@@ -23,3 +23,11 @@
 ## ADR-006 - Explicit interchange boundary
 
 **Accepted:** glTF verification has a declared mesh contract and fresh reimport. Editable Blender node graphs, arbitrary shaders, modifiers, and physics are authoring mechanisms rather than portable interchange guarantees. Receiving-engine acceptance is a later named/versioned gate.
+
+## ADR-007 - Comprehensive atlas with honest availability
+
+**Accepted:** adapt the breadth and per-experiment depth of Apple Native Labs into 96 Blender contracts, 16 shared core tickets and 192 experiment A/B tickets. Keep specification, implementation, automated/editor/visual/downstream acceptance separate. Search all contracts in the native host, and expose build actions only for installed adapters. Dependencies, profiles and failure checks make the program actionable rather than a feature list.
+
+## ADR-008 - Shared local operation spine
+
+**Accepted:** UI and CLI use validated Open/Apply/Reset requests with explicit scene identity, receipts and bounded same-process retries. Durable jobs, atomic artifact publication and restart recovery require later implementation and qualification; local receipts must not imply those services.

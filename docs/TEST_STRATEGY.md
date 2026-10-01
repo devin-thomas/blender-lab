@@ -17,6 +17,10 @@ BL-001 checks owned mesh and modifier data plus evaluated geometry. BL-002 check
 
 The exact assertions live with source and receipts. This document describes intent; it does not upgrade an unexecuted assertion to evidence. Physics comparison uses tolerances and records Blender version; do not require byte-identical caches across machines.
 
+BL-007 measures doorway/wall/lintel seams, corner pivots, stair fit, linked mesh reuse and every part's vertex-color/shader path. BL-008 compares identical geometry and packed-atlas sharing across three exact shader graphs. BL-009 checks transparent texture-alpha wiring, editable quad count/UVs, material sharing, depth offset and strength. The operation suite rejects invalid values, conflicting retries, mismatched scene scope and planned IDs before mutation, checks both endpoints and meaningful alternate values, and preserves an unrelated sentinel.
+
+The deterministic generator checks stable IDs, required journeys/assertions, known dependencies and cycles. Source checks compare implemented catalog IDs with actual adapters and exact ZIP bytes. Installed-editor acceptance verifies full atlas loading/search/available filtering, planned-card inspection, all implemented journeys, eight resets per lab with stable datablock counts and separate export takes. Future B tickets must execute their own feature checks; generic catalog validation cannot qualify them.
+
 ## Editor acceptance
 
 In a fresh file install/enable the ZIP, open the tab, build each lab, adjust its control, inspect the mechanism, and save/reopen a copy. Reset one lab while unrelated content exists and confirm unrelated content remains. Exercise the error path for an invalid output location. Check normal viewport scale and a narrow sidebar. Record the real journey separately from background tests.

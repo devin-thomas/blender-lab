@@ -4,9 +4,13 @@
 
 A user can build an original example in Blender, change a meaningful input, inspect the implementation, restore its baseline, and reproduce bounded evidence. The laboratory teaches through Blender's real editable data rather than a video-only explanation or a custom imitation editor.
 
-## First release
+## Comprehensive delivery program
 
-Six labs form a complete small production chain: silhouette -> UV/material -> procedural repetition -> animation -> simulation -> interchange. They share one N-sidebar host, stable IDs, original fixtures, a CLI runner, optional capture, and a documented extension contract. The runtime baseline is Blender 5.2.2 LTS; compatibility beyond the tested host remains explicit.
+The program contains **96 experiments**, **16 core infrastructure tickets** and **192 experiment implementation/qualification tickets**. The [capability matrix](CAPABILITY_MATRIX.md) maps domains and acceptance; [milestones](MILESTONES.md) order delivery by dependencies. Every [card](experiments/INDEX.md) specifies a visible moment, typed controls, original fixture, interaction journey, positive/negative assertions, ownership, profiles, budgets, fallback and limitations. `specs/experiments.json` is authoritative; deterministic generated views must pass `scripts/generate_catalog.py --check`.
+
+Coverage spans modeling/sculpting, surface authoring, Geometry Nodes, character rigging/animation, simulations, lighting/rendering, compositing, 2D/tracking, scene/asset management, interchange, editor extensions and automation services. A specified entry is a delivery contract, not an implemented adapter. The initial six labs remain the foundation; the next authoring wave adds modular environments, vertex-shader comparison and gradient-card atmosphere.
+
+The native sidebar searches the full atlas by text/category, pages results, displays availability and fallback, and launches available adapters. Planned entries expose contracts without unavailable build buttons. The account-free public baseline includes original fixtures and a CLI runner. Blender 5.2.2 LTS is the observed runtime; other versions/devices/surfaces remain unqualified until tested. This independent project is distinct from Blender's official Lab MCP.
 
 ## Required behavior
 
@@ -20,6 +24,11 @@ Six labs form a complete small production chain: silhouette -> UV/material -> pr
 | Repeatable source | A clean checkout can recreate scenes and package the add-on |
 | Original fixtures | No copied game assets, personal files, or unavailable downloads |
 | Interchange proof | Export file is reimported and compared for the bounded geometry contract |
+| Typed operations | UI/CLI share finite-input validation, explicit instance scope and local retry protection |
+| Resource profiles | Frame, geometry, image, time/storage bounds and fallback are declared per feature |
+| Job recovery | Long-job qualification requires owned caches, cancellation, checkpoints and atomic artifact publication |
+| Teaching journey | Every lab specifies a visible before/after, native inspection and user exercise |
+| Capability gaps | Unimplemented and unqualified domains retain dependency tickets and distinct evidence states |
 
 ## Completion states
 
@@ -27,6 +36,8 @@ Six labs form a complete small production chain: silhouette -> UV/material -> pr
 
 No state implies production certification. In particular a glTF roundtrip in Blender does not prove Godot import settings, material fidelity, collider behavior, or game performance.
 
-## Out of scope for this slice
+## Delivery and acceptance boundaries
 
-Full game production, production character art, a replacement for an artist, online services, cloud rendering, an asset marketplace, and every Blender subsystem are expansion opportunities. The workshop remains useful before those additions. Preserve original project ownership and license review when introducing external material.
+Close shared prerequisites and experiment A/B tickets before widening implementation claims. Start with representative bounded profiles, then qualify persistence/native editor behavior and named receiving tools. A CPU fallback may preserve image acceptance while leaving GPU/performance open; static substitutes cannot qualify fluid simulation. See [execution profiles](EXECUTION_PROFILES.md), [data contracts](DATA_CONTRACTS.md), [automation surfaces](AUTOMATION_SURFACES.md) and [test strategy](TEST_STRATEGY.md).
+
+The internal program composes generic capabilities into twelve personal mission contracts and consumes an exact published public revision. Full games, final art, connected services and finished videos need separate composition acceptance. Preserve ownership/license review when introducing external material. The current local operations are not a durable job service, deployed API or live MCP connection.

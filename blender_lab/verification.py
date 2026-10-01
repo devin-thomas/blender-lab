@@ -113,4 +113,7 @@ def verify(scene, output):
         return {"release_z": start, "settled_z": end, "frames": 90, "tolerance": [1, 1.5]}
     if lab == "BL-006":
         return roundtrip(scene, output)
+    if lab in ('BL-007', 'BL-008', 'BL-009'):
+        from . import authoring
+        return authoring.verify(scene, lab, value)
     raise ValueError(f"No verifier for {lab}")

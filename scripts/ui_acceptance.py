@@ -4,8 +4,12 @@ import json
 import traceback
 import os
 import sys
+import hashlib
 from datetime import datetime, timezone
 import bpy
+
+# Suppress first-run splash only in this process; never save user preferences.
+bpy.context.preferences.view.show_splash = False
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'build' / 'ui'
@@ -18,6 +22,13 @@ def run():
         bpy.ops.preferences.addon_enable(module='blender_lab')
         import blender_lab
         from blender_lab import labs, verification
+        from blender_lab import catalog
+        verification.check(len(catalog.ENTRIES) == 96, 'Installed package did not load the full atlas')
+        verification.check(catalog.filtered('BL-096')[0]['id'] == 'BL-096', 'Planned lab search failed')
+        verification.check({entry['id'] for entry in catalog.filtered(available=labs.LABS)} == set(labs.LABS),
+                           'Available-only atlas filter lost an implemented adapter')
+        bpy.ops.blender_lab.inspect(lab='BL-096')
+        verification.check(bpy.context.scene.blender_lab_selected == 'BL-096', 'Planned card inspection failed')
         original = bpy.context.scene
         sentinel = bpy.data.objects.new('User content sentinel', None)
         original.collection.objects.link(sentinel)
@@ -36,6 +47,7 @@ def run():
             after = {name: len(getattr(bpy.data, name)) for name in labs.DATA_COLLECTIONS}
             verification.check(before == after, f'{lab} reset leaked datablocks: {before} -> {after}')
             checks.append({'lab': lab, 'metrics': metrics, 'reset_preserved_user_scene': True})
+        bpy.ops.blender_lab.open(lab='BL-006')
         for area in bpy.context.screen.areas:
             if area.type == 'VIEW_3D':
                 area.spaces.active.show_region_ui = True
@@ -48,7 +60,9 @@ def run():
         verification.check(len(exports) >= 2 and all((p / 'artifact.glb').is_file() for p in exports), 'UI exports overwrote a prior take')
         bpy.ops.render.render(write_still=True)
         (OUTPUT / 'evidence.json').write_text(json.dumps({'passed': True, 'timestamp': datetime.now(timezone.utc).isoformat(), 'blender': bpy.app.version_string,
-            'installed_module': blender_lab.__file__, 'checks': checks, 'reset_datablocks_stable': True}, indent=2) + '\n')
+            'installed_module': blender_lab.__file__, 'atlas_entries': len(catalog.ENTRIES),
+            'catalog_sha256': hashlib.sha256((Path(blender_lab.__file__).parent / 'catalog.json').read_bytes()).hexdigest(),
+            'checks': checks, 'reset_datablocks_stable': True}, indent=2) + '\n')
         for area in bpy.context.screen.areas:
             if area.type == 'VIEW_3D':
                 region = next(item for item in area.regions if item.type == 'WINDOW')

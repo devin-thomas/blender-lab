@@ -15,7 +15,7 @@ parser.add_argument('--value', type=float, default=1)
 args = parser.parse_args()
 if not args.blender:
     parser.error('Set BLENDER_BIN or pass --blender /path/to/blender')
-command = [args.blender, '--background', '--factory-startup', '--python-exit-code', '1', '--python',
+command = [args.blender, '--background', '--factory-startup', '--disable-autoexec', '--python-exit-code', '1', '--python',
            str(ROOT / 'scripts' / 'entry.py'), '--', '--action', args.action, '--output', str(args.output.resolve()), '--value', str(args.value)]
 if args.lab:
     command.extend(['--lab', args.lab])
