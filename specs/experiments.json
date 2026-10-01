@@ -1530,8 +1530,8 @@
       "control": "Bend angle",
       "card": "docs/experiments/BL-010.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Armature",
         "bpy.types.ArmatureModifier",
@@ -1619,9 +1619,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -1651,8 +1651,8 @@
       "control": "Blend frames",
       "card": "docs/experiments/BL-011.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Action",
         "bpy.types.NlaTrack",
@@ -1740,9 +1740,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -1772,8 +1772,8 @@
       "control": "Field of view",
       "card": "docs/experiments/BL-012.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Camera",
         "mathutils.Matrix",
@@ -1861,9 +1861,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -1893,8 +1893,8 @@
       "control": "Density",
       "card": "docs/experiments/BL-013.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.GeometryNodeDistributePointsOnFaces",
         "bpy.types.GeometryNodeInstanceOnPoints",
@@ -1981,9 +1981,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2013,8 +2013,8 @@
       "control": "Domain",
       "card": "docs/experiments/BL-014.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.GeometryNodeStoreNamedAttribute",
         "bpy.types.GeometryNodeFieldOnDomain",
@@ -2106,9 +2106,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2138,8 +2138,8 @@
       "control": "Target density",
       "card": "docs/experiments/BL-015.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.MeshUVLoopLayer",
         "bpy.types.MeshPolygon",
@@ -2226,9 +2226,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2623,8 +2623,8 @@
       "control": "Treatment amount",
       "card": "docs/experiments/BL-019.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.CompositorNodeTree",
         "bpy.types.NodeTree",
@@ -2711,9 +2711,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2743,8 +2743,8 @@
       "control": "Key energy",
       "card": "docs/experiments/BL-020.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Light",
         "bpy.types.World",
@@ -2835,9 +2835,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2867,8 +2867,8 @@
       "control": "Asset role",
       "card": "docs/experiments/BL-021.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.AssetMetaData",
         "bpy.types.ID.asset_mark",
@@ -2959,9 +2959,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -2991,8 +2991,8 @@
       "control": "Frames",
       "card": "docs/experiments/BL-022.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Camera",
         "bpy.types.RenderSettings",
@@ -3081,9 +3081,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3367,8 +3367,8 @@
       "control": "Cut position",
       "card": "docs/experiments/BL-025.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bmesh.ops",
         "bmesh.types.BMesh",
@@ -3450,9 +3450,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3482,8 +3482,8 @@
       "control": "Opening width",
       "card": "docs/experiments/BL-026.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.BooleanModifier",
         "bpy.types.Mesh",
@@ -3573,9 +3573,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3605,8 +3605,8 @@
       "control": "Surface offset",
       "card": "docs/experiments/BL-027.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.ShrinkwrapModifier",
         "bpy.types.Mesh",
@@ -3693,9 +3693,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3725,8 +3725,8 @@
       "control": "Attribute domain",
       "card": "docs/experiments/BL-028.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Attribute",
         "bpy.types.AttributeGroupMesh",
@@ -3819,9 +3819,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3851,8 +3851,8 @@
       "control": "Expression weight",
       "card": "docs/experiments/BL-029.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Key",
         "bpy.types.ShapeKey",
@@ -3939,9 +3939,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3971,8 +3971,8 @@
       "control": "Path resolution",
       "card": "docs/experiments/BL-030.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Curve",
         "bpy.types.Spline",
@@ -4059,9 +4059,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4091,8 +4091,8 @@
       "control": "Extrusion",
       "card": "docs/experiments/BL-031.md",
       "implementation": "implemented",
-      "verification": "qualification-pending",
-      "evidence": "Adapter source implemented. Runtime, editor, visual and downstream qualification for this coding wave has not yet run.",
+      "verification": "expanded-qualification-pending",
+      "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Curve",
         "bpy.types.VectorFont",
@@ -4180,9 +4180,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
-        "editor": "not-run",
-        "visual": "not-run",
+        "automated": "bounded-outcomes-passed",
+        "editor": "operator-smoke-passed",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [

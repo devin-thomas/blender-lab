@@ -51,3 +51,29 @@ A reviewed bounded outcome or operator-smoke result does not close all expanded 
 Qualified source expansion: `44fdffe8e49598b5eb867af8f0a8b067c6f3270e`. A fresh public-only GitHub checkout passed package/catalog validation and all nine outcomes at 2026-10-01 16:10:15 UTC. Python-source SHA-256: `4eab6ad360771136bc183a779e646fd91a1e357017f7342ee92c5870c7425420`. Canonical LF catalog SHA-256: `e7eb82f763c9ac34b48d44e1313a876fbd2823311c02983a3166369350ec92bd`. Generator writes/checks exact UTF-8 LF bytes so Windows and macOS packages carry identical catalog bytes.
 
 Installed editor qualification completed 16:07:07 UTC; nine files reopened after outcome checks. Final Cappy recipe qualification began 16:07:37 UTC, all nine sessions completed with verified replay. New authoring session IDs: BL-007 `ses_1d81f865-7943-40fc-9918-dbcd12ee12b9`, BL-008 `ses_8b95afd8-eb76-45eb-8031-b8de166601c9`, BL-009 `ses_78254583-2518-4b81-a722-eeb22bdd4809`. Raw receipts remain local and identify their actual catalog bytes; canonical package requalification follows the publication revision rather than reusing older media as new evidence.
+
+
+## Typed authoring wave: 26 implemented adapters
+
+Published source checkpoint `8a09f0bf21eab488cd440bb640960234405ccff9` adds BL-010..015, BL-019..022 and BL-025..031. The atlas still contains 96 contracts; 26 adapters are implemented and 70 remain specified. GPT-6 Luna authored the geometry module and GPT-6.1 Sol authored motion and the typed/wave harness; root integrated production, controls, ownership and validation. Syntax-only worker checks preceded parent runtime waves.
+
+A fresh public-only GitHub checkout qualified on the same macOS arm64 / Blender 5.2.2 LTS `d13f752e3b9c` baseline:
+
+| Gate | Result | Actual scope |
+|---|---|---|
+| Public source/package/catalog | Passed | 26 registered/Cappy IDs match; 96 cards, DAG, links and exact allowlisted source ZIP |
+| Headless test + fresh reopen | Passed | All 26 labs, completed 2026-10-01 18:17:39 UTC; each test save loaded in another fresh process |
+| Typed controls | Passed | 102 numeric-endpoint/enum alternatives across 34 controls; 202 invalid typed requests; measured output selectors, partial merge and reset/default/shared-data sentinels |
+| Feature corruption | Passed | All 17 new adapters detect one broken scene mechanism each, recover through reset and preserve an unrelated scene sentinel |
+| Installed editor | Operator smoke passed | Completed 18:17:48 UTC; 96-entry atlas, 26 Open/Apply/Reset journeys, 208 repeated resets with stable datablock counts, typed rig widgets actually drawn and screenshot inspected |
+| New previews | Rendered and inspected | All 17 default stills; sprite atlas plus representative alpha frames inspected; original neutral fixtures and intended mechanisms remain editable |
+| Cappy | Passed | Seven protocol/lifecycle tests; all 26 real scalar recipe record/replay pairs, began 18:19:20 UTC; no capture |
+| Complete cards/profiles/downstream/human | Pending | B tickets, named engines/devices and artist acceptance remain separate |
+
+Python module SHA-256: `00d2a3fdbe57dcbc2398b3fb5172a489c7808766395733a1bbad4170e76406ad`. Checkpoint catalog SHA-256: `4e8ffb06c6038f13170c9a5caaa625e7dc7bb8a4a8ff0a5e240d9bcfb0ac51d3`. Source identity, commands, process deadlines and per-lab evidence are in ignored wave manifests. The status-only catalog promotion changes its hash without changing the qualified controls or mechanisms; release-pin requalification is recorded separately.
+
+Testing caught and fixed real failures: integer ID-property bounds, mesh replacement invalidating its object, use of freed evaluated meshes, generated checker packing, Python compositor menu names, lazy packed-image loading after reopen, unreferenced sprite atlas persistence, and asset fake-user retention leaking across resets. Cleanup clears owned fake-user retention only when no real references survive.
+
+Acceptance limits stay explicit. BL-019 compares clean/requested/enabled pixels at 96x64 and has a rendered 800px default preview; full-size readability/treatment comparison is still unqualified. BL-020 checks actual light/renderer/reference data and a Cycles preview, not paired luminance, EEVEE parity or a named GPU backend. BL-021 saves/reopens actual marked assets with packed dependencies and custom previews; independent library append remains pending. Geometry field/attribute/topology fixtures require their native data/editor inspection rather than inferring field values from a still. Cappy v1 covers the documented scalar shortcut; it does not replay every typed control or arbitrary editing. The camera lab deliberately frames its subject; a full-plinth label is outside that gameplay frame.
+
+Reproduce staged checks with `python scripts/wave.py test --blender PATH --output build/waves` (the 17 authoring adapters by default), explicit `--labs` for any implemented subset, and `blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python scripts/feature_failures.py -- --output build/negative`. Use the existing installed-editor and Cappy commands above for their separate surfaces. Raw outputs stay local; no personal assets or vendor account information enter public source.

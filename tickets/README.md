@@ -36,28 +36,28 @@ Generated from [the authoritative spec](../specs/experiments.json). 16 core tick
 | BL-007 Modular environment kit | [implemented](BL-007-A.md) | [expanded-qualification-pending](BL-007-B.md) | M1 |
 | BL-008 Vertex shade composition | [implemented](BL-008-A.md) | [expanded-qualification-pending](BL-008-B.md) | M1 |
 | BL-009 Gradient-card atmosphere | [implemented](BL-009-A.md) | [expanded-qualification-pending](BL-009-B.md) | M1 |
-| BL-010 Rig and deformation desk | [implemented](BL-010-A.md) | [qualification-pending](BL-010-B.md) | M1 |
-| BL-011 Action and NLA bench | [implemented](BL-011-A.md) | [qualification-pending](BL-011-B.md) | M1 |
-| BL-012 Camera and staging lab | [implemented](BL-012-A.md) | [qualification-pending](BL-012-B.md) | M1 |
-| BL-013 Geometry Nodes scatter | [implemented](BL-013-A.md) | [qualification-pending](BL-013-B.md) | M1 |
-| BL-014 Geometry Nodes field inspector | [implemented](BL-014-A.md) | [qualification-pending](BL-014-B.md) | M1 |
-| BL-015 UV and texel audit | [implemented](BL-015-A.md) | [qualification-pending](BL-015-B.md) | M1 |
+| BL-010 Rig and deformation desk | [implemented](BL-010-A.md) | [expanded-qualification-pending](BL-010-B.md) | M1 |
+| BL-011 Action and NLA bench | [implemented](BL-011-A.md) | [expanded-qualification-pending](BL-011-B.md) | M1 |
+| BL-012 Camera and staging lab | [implemented](BL-012-A.md) | [expanded-qualification-pending](BL-012-B.md) | M1 |
+| BL-013 Geometry Nodes scatter | [implemented](BL-013-A.md) | [expanded-qualification-pending](BL-013-B.md) | M1 |
+| BL-014 Geometry Nodes field inspector | [implemented](BL-014-A.md) | [expanded-qualification-pending](BL-014-B.md) | M1 |
+| BL-015 UV and texel audit | [implemented](BL-015-A.md) | [expanded-qualification-pending](BL-015-B.md) | M1 |
 | BL-016 Bake and material bridge | [specified](BL-016-A.md) | [not-run](BL-016-B.md) | M1 |
 | BL-017 Cloth and soft bodies | [specified](BL-017-A.md) | [not-run](BL-017-B.md) | M1 |
 | BL-018 Fluid boundary desk | [specified](BL-018-A.md) | [not-run](BL-018-B.md) | M1 |
-| BL-019 Compositor bench | [implemented](BL-019-A.md) | [qualification-pending](BL-019-B.md) | M1 |
-| BL-020 Lighting observatory | [implemented](BL-020-A.md) | [qualification-pending](BL-020-B.md) | M1 |
-| BL-021 Asset-browser kit | [implemented](BL-021-A.md) | [qualification-pending](BL-021-B.md) | M1 |
-| BL-022 Sprite-sheet camera | [implemented](BL-022-A.md) | [qualification-pending](BL-022-B.md) | M1 |
+| BL-019 Compositor bench | [implemented](BL-019-A.md) | [expanded-qualification-pending](BL-019-B.md) | M1 |
+| BL-020 Lighting observatory | [implemented](BL-020-A.md) | [expanded-qualification-pending](BL-020-B.md) | M1 |
+| BL-021 Asset-browser kit | [implemented](BL-021-A.md) | [expanded-qualification-pending](BL-021-B.md) | M1 |
+| BL-022 Sprite-sheet camera | [implemented](BL-022-A.md) | [expanded-qualification-pending](BL-022-B.md) | M1 |
 | BL-023 Godot receiving station | [specified](BL-023-A.md) | [not-run](BL-023-B.md) | M1 |
 | BL-024 Source-to-preview receipt | [specified](BL-024-A.md) | [not-run](BL-024-B.md) | M1 |
-| BL-025 Topology surgery | [implemented](BL-025-A.md) | [qualification-pending](BL-025-B.md) | M2 |
-| BL-026 Boolean assembly | [implemented](BL-026-A.md) | [qualification-pending](BL-026-B.md) | M2 |
-| BL-027 Retopology projection desk | [implemented](BL-027-A.md) | [qualification-pending](BL-027-B.md) | M2 |
-| BL-028 Mesh attribute contracts | [implemented](BL-028-A.md) | [qualification-pending](BL-028-B.md) | M2 |
-| BL-029 Shape-key expression desk | [implemented](BL-029-A.md) | [qualification-pending](BL-029-B.md) | M2 |
-| BL-030 Curve path and profile forge | [implemented](BL-030-A.md) | [qualification-pending](BL-030-B.md) | M2 |
-| BL-031 Typography geometry desk | [implemented](BL-031-A.md) | [qualification-pending](BL-031-B.md) | M2 |
+| BL-025 Topology surgery | [implemented](BL-025-A.md) | [expanded-qualification-pending](BL-025-B.md) | M2 |
+| BL-026 Boolean assembly | [implemented](BL-026-A.md) | [expanded-qualification-pending](BL-026-B.md) | M2 |
+| BL-027 Retopology projection desk | [implemented](BL-027-A.md) | [expanded-qualification-pending](BL-027-B.md) | M2 |
+| BL-028 Mesh attribute contracts | [implemented](BL-028-A.md) | [expanded-qualification-pending](BL-028-B.md) | M2 |
+| BL-029 Shape-key expression desk | [implemented](BL-029-A.md) | [expanded-qualification-pending](BL-029-B.md) | M2 |
+| BL-030 Curve path and profile forge | [implemented](BL-030-A.md) | [expanded-qualification-pending](BL-030-B.md) | M2 |
+| BL-031 Typography geometry desk | [implemented](BL-031-A.md) | [expanded-qualification-pending](BL-031-B.md) | M2 |
 | BL-032 Geometry Nodes simulation loop | [specified](BL-032-A.md) | [not-run](BL-032-B.md) | M2 |
 | BL-033 Geometry Nodes repeat machine | [specified](BL-033-A.md) | [not-run](BL-033-B.md) | M2 |
 | BL-034 Geometry Nodes bake boundary | [specified](BL-034-A.md) | [not-run](BL-034-B.md) | M2 |
