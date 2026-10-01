@@ -135,7 +135,7 @@ class BLENDERLAB_PT_catalog(bpy.types.Panel):
                 for line in wrap(selected.get('fallback', 'Read the experiment specification and qualification gates.'), width=34):
                     box.label(text=line)
             box.operator('wm.url_open', text='Full capability contract', icon='HELP').url = (
-                f"https://github.com/devin-thomas/blender-lab/blob/main/docs/experiments/{selected['id']}.md")
+                f"https://github.com/uppercut-labs/blender-lab/blob/main/docs/experiments/{selected['id']}.md")
             box.label(text=f"Plan: {selected.get('milestone', 'M0')}")
         lab = scene.get("blender_lab_id")
         if lab in labs.LABS:
