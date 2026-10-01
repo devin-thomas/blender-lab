@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "testedBaseline": "5.2.2 LTS",
+  "experiments": [
+    {
+      "id": "BL-001",
+      "title": "Silhouette Foundry",
+      "mechanism": "Mesh topology and bevel modifier",
+      "control": "Bevel width",
+      "card": "docs/experiments/BL-001.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    },
+    {
+      "id": "BL-002",
+      "title": "Pixel Surface Studio",
+      "mechanism": "Atlas UVs, Closest sampling and vertex color",
+      "control": "Vertex shade strength",
+      "card": "docs/experiments/BL-002.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    },
+    {
+      "id": "BL-003",
+      "title": "Instance Conservatory",
+      "mechanism": "Geometry Nodes instancing and realization",
+      "control": "Repeated count",
+      "card": "docs/experiments/BL-003.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    },
+    {
+      "id": "BL-004",
+      "title": "Motion Signal",
+      "mechanism": "Keyframe animation and evaluated motion",
+      "control": "Travel height",
+      "card": "docs/experiments/BL-004.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    },
+    {
+      "id": "BL-005",
+      "title": "Gravity Bench",
+      "mechanism": "Active/passive rigid-body simulation",
+      "control": "Release height",
+      "card": "docs/experiments/BL-005.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    },
+    {
+      "id": "BL-006",
+      "title": "Portable Artifact",
+      "mechanism": "Selected glTF export and reimport comparison",
+      "control": "Artifact width",
+      "card": "docs/experiments/BL-006.md",
+      "implementation": "implemented",
+      "verification": "automated-editor-verified",
+      "evidence": "docs/BUILD_STATUS.md"
+    }
+  ]
+}

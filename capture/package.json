@@ -1,0 +1,18 @@
+{
+  "name": "blender-lab-capture",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Blender Lab adapter for the official Uppercut Labs Cappy controller.",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "scenarios": "cappy scenarios -C . --config cappy.config.example.json --json",
+    "verify": "node verify.mjs",
+    "doctor": "cappy doctor -C . --config cappy.config.example.json --json"
+  },
+  "dependencies": {
+    "@uppercut-labs/cappy": "0.1.0",
+    "ws": "^8.21.3"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "project": { "id": "blender-lab", "name": "Blender Lab" },
+  "game": { "command": "node", "args": ["adapter.mjs"], "cwd": "." },
+  "adapter": { "host": "127.0.0.1", "port": 0, "expectedAdapter": "blender-lab-cappy", "requiredCapabilities": ["scenarios", "replay"] },
+  "workspace": {},
+  "timeouts": { "connectMs": 10000, "readyMs": 180000, "processMs": 180000 },
+  "presets": { "master-only": {} },
+  "defaultPreset": "master-only"
+}

@@ -1,0 +1,4 @@
+node_modules/
+.cappy/
+verification.json
+cappy.capture.local.json
