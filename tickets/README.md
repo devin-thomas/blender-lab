@@ -42,7 +42,7 @@ Generated from [the authoritative spec](../specs/experiments.json). 16 core tick
 | BL-013 Geometry Nodes scatter | [implemented](BL-013-A.md) | [expanded-qualification-pending](BL-013-B.md) | M1 |
 | BL-014 Geometry Nodes field inspector | [implemented](BL-014-A.md) | [expanded-qualification-pending](BL-014-B.md) | M1 |
 | BL-015 UV and texel audit | [implemented](BL-015-A.md) | [expanded-qualification-pending](BL-015-B.md) | M1 |
-| BL-016 Bake and material bridge | [specified](BL-016-A.md) | [not-run](BL-016-B.md) | M1 |
+| BL-016 Bake and material bridge | [implemented](BL-016-A.md) | [not-run](BL-016-B.md) | M1 |
 | BL-017 Cloth and soft bodies | [specified](BL-017-A.md) | [not-run](BL-017-B.md) | M1 |
 | BL-018 Fluid boundary desk | [specified](BL-018-A.md) | [not-run](BL-018-B.md) | M1 |
 | BL-019 Compositor bench | [implemented](BL-019-A.md) | [expanded-qualification-pending](BL-019-B.md) | M1 |
@@ -59,14 +59,14 @@ Generated from [the authoritative spec](../specs/experiments.json). 16 core tick
 | BL-030 Curve path and profile forge | [implemented](BL-030-A.md) | [expanded-qualification-pending](BL-030-B.md) | M2 |
 | BL-031 Typography geometry desk | [implemented](BL-031-A.md) | [expanded-qualification-pending](BL-031-B.md) | M2 |
 | BL-032 Geometry Nodes simulation loop | [specified](BL-032-A.md) | [not-run](BL-032-B.md) | M2 |
-| BL-033 Geometry Nodes repeat machine | [specified](BL-033-A.md) | [not-run](BL-033-B.md) | M2 |
+| BL-033 Geometry Nodes repeat machine | [implemented](BL-033-A.md) | [not-run](BL-033-B.md) | M2 |
 | BL-034 Geometry Nodes bake boundary | [specified](BL-034-A.md) | [not-run](BL-034-B.md) | M2 |
-| BL-035 Typed node-group interface | [specified](BL-035-A.md) | [not-run](BL-035-B.md) | M2 |
-| BL-036 Material graph migration | [specified](BL-036-A.md) | [not-run](BL-036-B.md) | M2 |
-| BL-037 Drivers and constraint observatory | [specified](BL-037-A.md) | [not-run](BL-037-B.md) | M3 |
-| BL-038 Inverse-kinematics reach desk | [specified](BL-038-A.md) | [not-run](BL-038-B.md) | M3 |
-| BL-039 Pose asset library | [specified](BL-039-A.md) | [not-run](BL-039-B.md) | M3 |
-| BL-040 Animation bake interchange | [specified](BL-040-A.md) | [not-run](BL-040-B.md) | M3 |
+| BL-035 Typed node-group interface | [implemented](BL-035-A.md) | [not-run](BL-035-B.md) | M2 |
+| BL-036 Material graph migration | [implemented](BL-036-A.md) | [not-run](BL-036-B.md) | M2 |
+| BL-037 Drivers and constraint observatory | [implemented](BL-037-A.md) | [not-run](BL-037-B.md) | M3 |
+| BL-038 Inverse-kinematics reach desk | [implemented](BL-038-A.md) | [not-run](BL-038-B.md) | M3 |
+| BL-039 Pose asset library | [implemented](BL-039-A.md) | [not-run](BL-039-B.md) | M3 |
+| BL-040 Animation bake interchange | [implemented](BL-040-A.md) | [not-run](BL-040-B.md) | M3 |
 | BL-041 Grease Pencil drawing desk | [specified](BL-041-A.md) | [not-run](BL-041-B.md) | M3 |
 | BL-042 Grease Pencil modifier grammar | [specified](BL-042-A.md) | [not-run](BL-042-B.md) | M3 |
 | BL-043 Grease Pencil timing desk | [specified](BL-043-A.md) | [not-run](BL-043-B.md) | M3 |
@@ -84,8 +84,8 @@ Generated from [the authoritative spec](../specs/experiments.json). 16 core tick
 | BL-055 Render passes and AOV inspector | [specified](BL-055-A.md) | [not-run](BL-055-B.md) | M4 |
 | BL-056 Light linking room | [specified](BL-056-A.md) | [not-run](BL-056-B.md) | M4 |
 | BL-057 Shadow catcher composition | [specified](BL-057-A.md) | [not-run](BL-057-B.md) | M4 |
-| BL-058 World environment forge | [specified](BL-058-A.md) | [not-run](BL-058-B.md) | M4 |
-| BL-059 Procedural material spectrum | [specified](BL-059-A.md) | [not-run](BL-059-B.md) | M4 |
+| BL-058 World environment forge | [implemented](BL-058-A.md) | [not-run](BL-058-B.md) | M4 |
+| BL-059 Procedural material spectrum | [implemented](BL-059-A.md) | [not-run](BL-059-B.md) | M4 |
 | BL-060 Normal and displacement bridge | [specified](BL-060-A.md) | [not-run](BL-060-B.md) | M4 |
 | BL-061 Transparency sorting chamber | [specified](BL-061-A.md) | [not-run](BL-061-B.md) | M4 |
 | BL-062 Volume grid inspection | [specified](BL-062-A.md) | [not-run](BL-062-B.md) | M4 |

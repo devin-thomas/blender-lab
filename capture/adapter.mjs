@@ -6,9 +6,14 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const scenarios = [
-  ['BL-001', 'Mesh modelling'], ['BL-002', 'Pixel UV and vertex colour'],
-  ['BL-003', 'Geometry nodes'], ['BL-004', 'Keyframe animation'],
-  ['BL-005', 'Rigid body simulation'], ['BL-006', 'glTF roundtrip'],
+  ['BL-016', 'Bake and material bridge'], ['BL-033', 'Geometry Nodes repeat machine'],
+  ['BL-035', 'Typed node-group interface'], ['BL-036', 'Material graph migration'],
+  ['BL-037', 'Drivers and constraint observatory'], ['BL-038', 'Inverse-kinematics reach desk'],
+  ['BL-039', 'Pose asset library'], ['BL-040', 'Animation bake interchange'],
+  ['BL-058', 'World environment forge'], ['BL-059', 'Procedural material spectrum'],
+  ['BL-001', 'Silhouette Foundry'], ['BL-002', 'Pixel Surface Studio'],
+  ['BL-003', 'Instance Conservatory'], ['BL-004', 'Motion Signal'],
+  ['BL-005', 'Gravity Bench'], ['BL-006', 'Portable Artifact'],
   ['BL-007', 'Modular environment kit'], ['BL-008', 'Vertex shade composition'],
   ['BL-009', 'Gradient-card atmosphere'],
   ['BL-010', 'Rig and deformation desk'],

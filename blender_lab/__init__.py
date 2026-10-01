@@ -26,7 +26,7 @@ class BLENDERLAB_OT_open(bpy.types.Operator):
     def execute(self, context):
         perform(Request('open', self.lab))
         context.scene.blender_lab_selected = self.lab
-        for area in context.screen.areas:
+        for area in context.screen.areas if context.screen else ():
             if area.type == 'VIEW_3D':
                 area.spaces.active.region_3d.view_perspective = 'CAMERA'
                 area.spaces.active.shading.type = 'MATERIAL'

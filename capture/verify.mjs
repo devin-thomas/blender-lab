@@ -21,9 +21,14 @@ async function command(args, env = {}) {
 }
 
 const report = { host: process.platform, node: process.version, cappy: '@uppercut-labs/cappy@0.1.0', captured: false, checkedAt: new Date().toISOString(), labs: [] };
+const requested = process.argv.slice(2);
+if (new Set(requested).size !== requested.length || requested.some(id => !scenarios.some(s => s.id === id.toLowerCase()))) {
+  throw new Error('Arguments must be distinct implemented lab IDs');
+}
+const selected = requested.length ? scenarios.filter(s => requested.includes(s.id.toUpperCase())) : scenarios;
 const listed = await command(['scenarios']);
 if (listed.data.scenarios.length !== scenarios.length) throw new Error('Expected every implemented lab scenario');
-for (const { id: scenarioId } of scenarios) {
+for (const { id: scenarioId } of selected) {
   const id = scenarioId.toUpperCase();
   console.error(`Verifying ${id} through Cappy record and replay --no-capture`);
   const recorded = await command(['record'], { BLENDER_LAB_SCENARIO: id, BLENDER_LAB_VALUE: '1.25' });

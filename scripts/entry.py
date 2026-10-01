@@ -16,6 +16,16 @@ from blender_lab.operations import Request, perform
 
 # These select measured outcomes, excluding echoed controls and artifact paths.
 OUTCOMES = {
+    'BL-016': {'Bake size': ('image_dimensions',), 'Margin': ('baked_pixel_sha256',)},
+    'BL-033': {'Iterations': ('evaluated_vertices', 'bounds'), 'Step offset': ('bounds',)},
+    'BL-035': {'Width': ('measured_width',), 'Count': ('evaluated_vertices',)},
+    'BL-036': {'Schema version': ('schema_version', 'migrated_reference_rgb'), 'Tint strength': ('migrated_reference_rgb',)},
+    'BL-037': {'Control travel': ('evaluated_translation',), 'Constraint influence': ('evaluated_translation',)},
+    'BL-038': {'Target reach': ('tip', 'tip_error'), 'Pole angle': ('elbow',)},
+    'BL-039': {'Pose blend': ('evaluated_rotations_radians',), 'Bone scope': ('evaluated_rotations_radians',)},
+    'BL-040': {'Sample step': ('sample_frames',), 'Bake range': ('sample_frames',)},
+    'BL-058': {'World strength': ('rendered_preview_sha256',), 'Rotation': ('rendered_preview_sha256',)},
+    'BL-059': {'Pattern scale': ('preview.preview_sha256',), 'Roughness': ('preview.preview_sha256',)},
     'BL-010': {'Bend angle': ('weighted.max_displacement', 'weighted.tip_vertex'),
                'Weight transition': ('weighted.middle_vertex',)},
     'BL-011': {'Blend frames': ('samples', 'strip_bounds'), 'Clip offset': ('samples', 'strip_bounds')},

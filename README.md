@@ -2,7 +2,7 @@
 
 **Make a thing. Change the mechanism. Inspect what survives.**
 
-Blender Lab is an editable capability atlas inside Blender: **96 detailed experiment contracts**, **16 core infrastructure tickets** and **192 implementation/qualification tickets** cover Blender authoring and automation. Twenty-six implemented adapters span modeling, surfaces, procedural geometry, rigging, actions, staging, simulation, interchange, compositor, lighting, asset metadata and sprite production. Qualification is recorded separately for each adapter. The scene, node tree, modifier stack and timeline are the product; measured receipts explain what actually ran.
+Blender Lab is an editable capability atlas inside Blender: **96 detailed experiment contracts**, **16 core infrastructure tickets** and **192 implementation/qualification tickets** cover Blender authoring and automation. Thirty-six implemented adapters span modeling, surfaces, procedural geometry, rigging, actions, staging, simulation, interchange, compositor, lighting, asset metadata and sprite production. Qualification is recorded separately for each adapter. The scene, node tree, modifier stack and timeline are the product; measured receipts explain what actually ran.
 
 The first implementation targets Blender **5.2.2 LTS**. The add-on declares Blender 5.2 as its minimum; other releases remain unqualified until tested. Current execution evidence and remaining editor gates belong in [BUILD_STATUS](docs/BUILD_STATUS.md).
 
@@ -54,6 +54,17 @@ Generated scenes, renders, exports, logs, and ZIPs remain local and ignored. The
 | BL-029 | Shape-key expression desk | Relative brow/mouth keys and evaluated offsets |
 | BL-030 | Curve path and profile forge | Editable curve sweep/profile and converted mesh copy |
 | BL-031 | Typography geometry desk | Bundled font, text fitting, extrusion and converted geometry |
+
+| BL-016 | Bake and material bridge | Actual Cycles contribution bake, UV target and packed portable image |
+| BL-033 | Geometry Nodes repeat machine | Paired repeat state, zero-iteration identity and bounded tower growth |
+| BL-035 | Typed node-group interface | Stable socket identifiers, typed modifier RNA and measured rail dimensions |
+| BL-036 | Material graph migration | Staged known schemas, original recovery graph and measured tint response |
+| BL-037 | Drivers and constraint observatory | Trusted non-scripted dependency and ordered evaluated clamps |
+| BL-038 | Inverse-kinematics reach desk | Two-bone crane, poles, limits and measured reach residuals |
+| BL-039 | Pose asset library | Marked slotted pose Actions and scoped bone blending |
+| BL-040 | Animation bake interchange | Separate visual-key Action, source preservation and interpolation error; export pending |
+| BL-058 | World environment forge | Original packed equirectangular sky and rendered rotation/energy effects |
+| BL-059 | Procedural material spectrum | Noise/Voronoi copper and stone, rendered scale/roughness effects |
 
 All 96 [workshop cards](docs/experiments/INDEX.md) specify controls, original fixtures, interactions, positive/negative checks, ownership, budgets and fallbacks. Explore the [capability matrix](docs/CAPABILITY_MATRIX.md), [milestones](docs/MILESTONES.md), [roadmap](docs/ROADMAP.md) and [dependency tickets](tickets/README.md). Additional sculpting, baking, simulations, 2D/tracking, render profiles, interchange and connected services remain delivery work. Implemented cards retain open qualification gates; metadata does not establish full domain support.
 

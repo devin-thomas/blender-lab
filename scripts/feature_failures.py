@@ -22,6 +22,7 @@ from blender_lab import labs, verification
 
 
 ADAPTER_LABS = (
+    'BL-016', 'BL-033', 'BL-035', 'BL-036', 'BL-037', 'BL-038', 'BL-039', 'BL-040', 'BL-058', 'BL-059',
     'BL-010', 'BL-011', 'BL-012', 'BL-013', 'BL-014', 'BL-015',
     'BL-019', 'BL-020', 'BL-021', 'BL-022',
     'BL-025', 'BL-026', 'BL-027', 'BL-028',
@@ -37,6 +38,53 @@ def _role(scene, key, role):
 
 
 def _mutate(lab, scene):
+    if lab == 'BL-016':
+        from blender_lab import surfaces
+        subject = surfaces._role(scene, 'bake_source')
+        subject.data.materials[0].node_tree.nodes['BL Bake Target'].image = None
+        return 'cleared active bake image target'
+    if lab == 'BL-033':
+        obj = _role(scene, 'node_contract_role', 'primary')
+        graph = obj.modifiers[-1].node_group
+        graph.nodes.remove(next(node for node in graph.nodes if node.bl_idname == 'GeometryNodeRepeatInput'))
+        return 'removed repeat input and paired state'
+    if lab == 'BL-035':
+        obj = _role(scene, 'node_contract_role', 'primary')
+        graph = obj.modifiers[-1].node_group
+        graph['blender_lab_count_identifier'] = graph['blender_lab_width_identifier']
+        return 'changed the stable Count identifier to the float Width socket'
+    if lab == 'BL-036':
+        from blender_lab import surfaces
+        material = surfaces._role(scene, 'migration_subject').data.materials[0]
+        material['surface_schema_version'] = 99
+        return 'changed the assigned material to an unknown schema'
+    if lab == 'BL-037':
+        from blender_lab import kinematics
+        signal = kinematics._role(scene, 'driven_signal')
+        signal.animation_data.drivers[0].driver.variables[0].targets[0].data_path = '["missing"]'
+        return 'removed the trusted driver property dependency'
+    if lab == 'BL-038':
+        from blender_lab import kinematics
+        kinematics._role(scene, 'reach_rig').pose.bones['Upper'].constraints[0].pole_target = None
+        return 'cleared the two-bone IK pole target'
+    if lab == 'BL-039':
+        from blender_lab import kinematics
+        kinematics._role(scene, 'pose_rig').data.bones['Upper']['stable_bone_id'] = 'wrong'
+        return 'changed the pose rig stable bone identity'
+    if lab == 'BL-040':
+        from blender_lab import kinematics
+        _, _, bag = kinematics._action_data(kinematics._role(scene, 'baked_copy'), 'visual_bake')
+        bag.fcurves.remove(bag.fcurves[0])
+        return 'removed a required visual-key bake channel'
+    if lab == 'BL-058':
+        scene.world.node_tree.nodes['Original packed equirectangular sky'].projection = 'MIRROR_BALL'
+        return 'changed the authored environment projection'
+    if lab == 'BL-059':
+        from blender_lab import surfaces
+        graph = surfaces._role(scene, 'pattern_copper').data.materials[0].node_tree
+        coordinate = graph.nodes['Original generated coordinates']
+        graph.links.remove(next(link for link in graph.links if link.from_node == coordinate))
+        return 'disconnected a procedural coordinate input'
     if lab == 'BL-010':
         from blender_lab import motion
         obj = motion._role(scene, 'weighted_limb')
@@ -193,7 +241,7 @@ def _run_case(lab, original_scene, sentinel, job):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--labs', help='Comma-separated implemented adapter IDs; default is all 17 new adapters')
+    parser.add_argument('--labs', help='Comma-separated implemented typed adapter IDs; default is all adapters')
     parser.add_argument('--output', type=Path, help='Parent directory for a new unique feature-failures job')
     argv = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
     args = parser.parse_args(argv)

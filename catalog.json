@@ -1739,7 +1739,7 @@
       "mechanism": "Explicit Cycles bake context, UV target image and portable Principled material reconstruction.",
       "control": "Bake size",
       "card": "docs/experiments/BL-016.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -1751,7 +1751,7 @@
       "controls": [
         {
           "name": "Bake size",
-          "type": "number",
+          "type": "integer",
           "default": 128,
           "range": "32..512 pixels",
           "purpose": "Bound output detail.",
@@ -1760,7 +1760,7 @@
         },
         {
           "name": "Margin",
-          "type": "number",
+          "type": "integer",
           "default": 4,
           "range": "0..16 pixels",
           "purpose": "Protect island borders.",
@@ -1829,7 +1829,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -3815,7 +3815,7 @@
       "mechanism": "Repeat zones with explicit iteration/state sockets and geometry growth limits.",
       "control": "Iterations",
       "card": "docs/experiments/BL-033.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -3827,7 +3827,7 @@
       "controls": [
         {
           "name": "Iterations",
-          "type": "number",
+          "type": "integer",
           "default": 4,
           "range": "0..12",
           "purpose": "Bound procedural repetition.",
@@ -3904,7 +3904,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4060,7 +4060,7 @@
       "mechanism": "NodeTree interface sockets, stable identifiers, constraints and modifier inputs.",
       "control": "Width",
       "card": "docs/experiments/BL-035.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4149,7 +4149,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4181,7 +4181,7 @@
       "mechanism": "Named node/link schema inspection, staged graph replacement and affected-output validation.",
       "control": "Schema version",
       "card": "docs/experiments/BL-036.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4196,7 +4196,9 @@
           "type": "integer",
           "default": 2,
           "range": "known integer versions only",
-          "purpose": "Select a supported migration."
+          "purpose": "Select a supported migration.",
+          "minimum": 1,
+          "maximum": 2
         },
         {
           "name": "Tint strength",
@@ -4267,7 +4269,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4299,7 +4301,7 @@
       "mechanism": "Driver variables, explicit data paths and bounded object constraints.",
       "control": "Control travel",
       "card": "docs/experiments/BL-037.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4388,7 +4390,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4420,7 +4422,7 @@
       "mechanism": "Armature edit/pose bones, IK constraint chain, pole target and explicit limits.",
       "control": "Target reach",
       "card": "docs/experiments/BL-038.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4509,7 +4511,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4541,7 +4543,7 @@
       "mechanism": "Pose Actions/asset metadata, bone-channel filtering and explicit pose application.",
       "control": "Pose blend",
       "card": "docs/experiments/BL-039.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4633,7 +4635,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -4665,7 +4667,7 @@
       "mechanism": "Visual-keying bake on a staged copy with explicit sampling, frame range and export.",
       "control": "Sample step",
       "card": "docs/experiments/BL-040.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -4755,7 +4757,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -6860,7 +6862,7 @@
       "mechanism": "World nodes, original equirectangular image and controlled environment rotation/strength.",
       "control": "World strength",
       "card": "docs/experiments/BL-058.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -6948,7 +6950,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",
@@ -6980,7 +6982,7 @@
       "mechanism": "Noise/Voronoi coordinates, ramps and explicit roughness/metalness material inputs.",
       "control": "Pattern scale",
       "card": "docs/experiments/BL-059.md",
-      "implementation": "specified",
+      "implementation": "implemented",
       "verification": "not-run",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
@@ -7069,7 +7071,7 @@
         }
       ],
       "states": {
-        "implementation": "specified",
+        "implementation": "implemented",
         "automated": "not-run",
         "editor": "not-run",
         "visual": "not-run",

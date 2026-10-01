@@ -6,6 +6,16 @@ import bpy
 from mathutils import Vector
 
 LABS = {
+    'BL-016': ('Bake and material bridge', 'Bake the authored copper shade into a packed UV image. Inspect the editable source and portable surface.'),
+    'BL-033': ('Geometry Nodes repeat machine', 'Change bounded iterations and step offset. Inspect paired state and evaluated tower growth.'),
+    'BL-035': ('Typed node-group interface', 'Change width and count through stable identifiers. Inspect the typed interface and evaluated rails.'),
+    'BL-036': ('Material graph migration', 'Select a known schema and tint strength. Inspect the staged graph and retained source.'),
+    'BL-037': ('Drivers and constraint observatory', 'Change travel and constraint influence. Inspect trusted driver dependencies and ordered clamps.'),
+    'BL-038': ('Inverse-kinematics reach desk', 'Move the crane target and pole angle. Inspect evaluated joint positions and reach residual.'),
+    'BL-039': ('Pose asset library', 'Blend the pose within a named bone scope. Inspect reusable slotted Actions and untouched channels.'),
+    'BL-040': ('Animation bake interchange', 'Change sample step and bake range. Compare the separate visual-key copy with the editable source.'),
+    'BL-058': ('World environment forge', 'Rotate the original packed environment and change its strength. Inspect bounded rendered differences.'),
+    'BL-059': ('Procedural material spectrum', 'Change noise scale and roughness. Compare original copper and stone reference surfaces.'),
     'BL-001': ('Silhouette Foundry', 'Change the bevel. Compare the base mesh and evaluated geometry.'),
     'BL-002': ('Pixel Surface Studio', 'Change vertex shade strength. Inspect the UVs, packed atlas and shader.'),
     'BL-003': ('Instance Conservatory', 'Change the count. Inspect Mesh Line, instancing and realization nodes.'),
@@ -34,6 +44,16 @@ LABS = {
     'BL-031': ('Typography geometry desk', 'Change text depth and width. Inspect bundled-font provenance, fitting and the converted mesh copy.'),
 }
 ADAPTERS = {
+    'BL-016': 'surfaces',
+    'BL-033': 'node_contracts',
+    'BL-035': 'node_contracts',
+    'BL-036': 'surfaces',
+    'BL-037': 'kinematics',
+    'BL-038': 'kinematics',
+    'BL-039': 'kinematics',
+    'BL-040': 'kinematics',
+    'BL-058': 'surfaces',
+    'BL-059': 'surfaces',
     'BL-010': 'motion',
     'BL-011': 'motion',
     'BL-012': 'motion',

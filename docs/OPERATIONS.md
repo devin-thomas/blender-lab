@@ -22,7 +22,7 @@ These formulas describe the initial implementation and its original fixtures. Th
 
 `python scripts/run.py ACTION --blender PATH [--lab BL-001] [--value 1] [--output PATH]`
 
-Actions are `build`, `test`, `render`, and `export`. Without selection, build/test/render run all 26 implemented adapters; export runs BL-006 only. Exporting a different lab fails explicitly. Planned atlas IDs cannot run. The default output is ignored `build/`; `BLENDER_BIN` or PATH can supply Blender.
+Actions are `build`, `test`, `render`, and `export`. Without selection, build/test/render run all 36 implemented adapters; export runs BL-006 only. Exporting a different lab fails explicitly. Planned atlas IDs cannot run. The default output is ignored `build/`; `BLENDER_BIN` or PATH can supply Blender.
 
 Every action generates and verifies its selected labs, saves `.blend` source artifacts, and writes a local `evidence.json`. BL-006 verification performs glTF export/reimport. `test` adds alternate-value comparisons and scoped-reset checks; `render` adds one still per selected lab. This is a source-driven background workflow; it does not automatically prove native panel interaction.
 
@@ -51,3 +51,15 @@ Use a UTF-8 JSON file keyed by exact card names, for example `{"Bend angle": 70,
 Legacy `--value` and Cappy v1 recipes remain bounded scalar shortcuts: the first numeric control scales from its default within the declared range; zero defaults use `max(0, value - 1)`; integer results round. An enum-first lab without numeric controls selects a declared choice. Actual typed maps are authoritative and recorded in receipts. This shortcut does not exercise every control or constitute complete typed replay.
 
 `python scripts/wave.py test --labs BL-010 BL-011 BL-012 --blender PATH --output build/waves` executes each selected lab in a fresh process, then reopens its saved file in another fresh process. The runner retains per-process logs and a wave manifest, enforces a shared per-lab timeout, continues through failures and exits nonzero if any required result fails. Typed tests cover declared alternatives/endpoints, measured output selectors, partial updates, invalid admission and scoped reset. Lighting's initial structural checks do not prove rendered luminance/backend parity; asset metadata checks do not prove library append behavior. Read each metric's pending gates.
+
+## Background-only acceptance
+
+To preserve desktop focus, use `--background` for every Blender process. `scripts/wave.py` and the Cappy runner already supply it. The operator checker refuses foreground execution:
+
+```sh
+blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python scripts/offscreen_acceptance.py -- --labs BL-016 BL-033 BL-035 BL-036 BL-037 BL-038 BL-039 BL-040 BL-058 BL-059
+```
+
+This exercises Open/Apply/Reset operators and repeated ownership cleanup without installing an add-on or opening a window. It records background execution explicitly. Native panel drawing, dialog interaction and human workflow acceptance remain separate gates.
+
+The new node fixtures use Blender 5.2 modifier `properties.inputs` RNA, identified by stable interface socket identifiers. BL-040 measures source-versus-bake matrices at keyed samples and every intervening frame. Sparse sampling beyond its motion tolerance is reported as such; the copy is not declared interchange-ready. BL-016 retains its editable procedural graph alongside the actual packed bake; matched renderer/source/portable appearance still needs its own tolerance check.

@@ -2,7 +2,7 @@
 
 ## Repository roles
 
-`specs/experiments.json` defines the atlas. The generator validates identities/dependency DAG and emits catalog, cards, matrix, milestones and tickets. The source-only ZIP embeds that catalog. `catalog.py` filters metadata without importing proposed adapters. `blender_lab/` contains the native host, shared local operations and 26 scene adapters; `scripts/` contains orchestration and qualification. Outputs remain ignored.
+`specs/experiments.json` defines the atlas. The generator validates identities/dependency DAG and emits catalog, cards, matrix, milestones and tickets. The source-only ZIP embeds that catalog. `catalog.py` filters metadata without importing proposed adapters. `blender_lab/` contains the native host, shared local operations and 36 scene adapters; `scripts/` contains orchestration and qualification. Outputs remain ignored.
 
 ```mermaid
 flowchart LR
@@ -11,7 +11,7 @@ flowchart LR
   Generate --> Docs[Cards and dependency tickets]
   UI --> Ops[Validated local operations]
   CLI[CLI entry] --> Ops
-  Ops --> Builders[26 scene adapters]
+  Ops --> Builders[36 scene adapters]
   Builders --> Scenes[Owned editable scenes]
   Scenes --> Checks[Scenario assertions]
   Scenes --> Renders[Local renders]
