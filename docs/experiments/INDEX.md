@@ -21,9 +21,9 @@
 | [BL-002](BL-002.md) | Pixel Surface Studio | Separate original pixel detail from broad vertex shade and inspect both contributions. | implemented | expanded-qualification-pending |
 | [BL-008](BL-008.md) | Vertex shade composition | Compare texture-only, authored shade and restrained light without mistaking them for the same mechanism. | implemented | expanded-qualification-pending |
 | [BL-015](BL-015.md) | UV and texel audit | Find a stretched island or leaking atlas margin before it becomes a game-art defect. | implemented | expanded-qualification-pending |
-| [BL-016](BL-016.md) | Bake and material bridge | Carry a chosen authored shade into a portable image and compare it with the editable source. | implemented | not-run |
-| [BL-036](BL-036.md) | Material graph migration | Upgrade a known material contract while preserving unrelated user nodes. | implemented | not-run |
-| [BL-059](BL-059.md) | Procedural material spectrum | Inspect scale and seed in an original procedural material before baking it into texture space. | implemented | not-run |
+| [BL-016](BL-016.md) | Bake and material bridge | Carry a chosen authored shade into a portable image and compare it with the editable source. | implemented | expanded-qualification-pending |
+| [BL-036](BL-036.md) | Material graph migration | Upgrade a known material contract while preserving unrelated user nodes. | implemented | expanded-qualification-pending |
+| [BL-059](BL-059.md) | Procedural material spectrum | Inspect scale and seed in an original procedural material before baking it into texture space. | implemented | expanded-qualification-pending |
 | [BL-060](BL-060.md) | Normal and displacement bridge | Compare a tangent-normal detail with actual displaced silhouette on the same original surface. | specified | not-run |
 | [BL-061](BL-061.md) | Transparency sorting chamber | Compare opaque, cutout and blended original surfaces from viewpoints that reveal their limits. | specified | not-run |
 
@@ -35,9 +35,9 @@
 | [BL-013](BL-013.md) | Geometry Nodes scatter | Scatter original modules with a seed you can replay and a density you can afford. | implemented | expanded-qualification-pending |
 | [BL-014](BL-014.md) | Geometry Nodes field inspector | See why a field changes when it crosses point, edge and face domains. | implemented | expanded-qualification-pending |
 | [BL-032](BL-032.md) | Geometry Nodes simulation loop | Persist a small state through frames and inspect what the simulation zone remembers. | specified | not-run |
-| [BL-033](BL-033.md) | Geometry Nodes repeat machine | Iterate a bounded construction and inspect why repeat count changes the final geometry. | implemented | not-run |
+| [BL-033](BL-033.md) | Geometry Nodes repeat machine | Iterate a bounded construction and inspect why repeat count changes the final geometry. | implemented | expanded-qualification-pending |
 | [BL-034](BL-034.md) | Geometry Nodes bake boundary | Freeze one procedural result and see which editable inputs are deliberately no longer live. | specified | not-run |
-| [BL-035](BL-035.md) | Typed node-group interface | Expose a useful parameter contract that an agent can inspect without guessing socket indexes. | implemented | not-run |
+| [BL-035](BL-035.md) | Typed node-group interface | Expose a useful parameter contract that an agent can inspect without guessing socket indexes. | implemented | expanded-qualification-pending |
 
 ## Animation
 
@@ -45,7 +45,7 @@
 |---|---|---|---|---|
 | [BL-004](BL-004.md) | Motion Signal | Edit a travel beat and prove the object reaches its apex before returning. | implemented | expanded-qualification-pending |
 | [BL-011](BL-011.md) | Action and NLA bench | Reuse two clips and inspect a transition rather than hiding motion in a baked movie. | implemented | expanded-qualification-pending |
-| [BL-040](BL-040.md) | Animation bake interchange | Bake a constrained motion and compare sampled output before sending it elsewhere. | implemented | not-run |
+| [BL-040](BL-040.md) | Animation bake interchange | Bake a constrained motion and compare sampled output before sending it elsewhere. | implemented | expanded-qualification-pending |
 
 ## Simulation
 
@@ -84,9 +84,9 @@
 | ID | Capability | User payoff | Implementation | Qualification |
 |---|---|---|---|---|
 | [BL-010](BL-010.md) | Rig and deformation desk | Compare a rigid segmented limb with a weighted limb at the same bend. | implemented | expanded-qualification-pending |
-| [BL-037](BL-037.md) | Drivers and constraint observatory | Explain a driven motion by inspecting its variables and constraint order. | implemented | not-run |
-| [BL-038](BL-038.md) | Inverse-kinematics reach desk | Move an effector and measure which poses are reachable without hiding joint limits. | implemented | not-run |
-| [BL-039](BL-039.md) | Pose asset library | Reuse a labeled original pose while preserving bone identity and blend meaning. | implemented | not-run |
+| [BL-037](BL-037.md) | Drivers and constraint observatory | Explain a driven motion by inspecting its variables and constraint order. | implemented | expanded-qualification-pending |
+| [BL-038](BL-038.md) | Inverse-kinematics reach desk | Move an effector and measure which poses are reachable without hiding joint limits. | implemented | expanded-qualification-pending |
+| [BL-039](BL-039.md) | Pose asset library | Reuse a labeled original pose while preserving bone identity and blend meaning. | implemented | expanded-qualification-pending |
 
 ## Camera and tracking
 
@@ -112,7 +112,7 @@
 | [BL-020](BL-020.md) | Lighting observatory | Compare world, area-light and material response while recording the rendering conditions. | implemented | expanded-qualification-pending |
 | [BL-056](BL-056.md) | Light linking room | Make a light affect one original object group and prove an excluded object stays unchanged. | specified | not-run |
 | [BL-057](BL-057.md) | Shadow catcher composition | Composite an original object onto an original plate and inspect the shadow contribution separately. | specified | not-run |
-| [BL-058](BL-058.md) | World environment forge | Build an original environment map and distinguish background appearance from lighting energy. | implemented | not-run |
+| [BL-058](BL-058.md) | World environment forge | Build an original environment map and distinguish background appearance from lighting energy. | implemented | expanded-qualification-pending |
 | [BL-068](BL-068.md) | Motion blur sampling chamber | Compare a sharp motion sample with shutter-integrated output and expose its sampling cost. | specified | not-run |
 
 ## Asset management

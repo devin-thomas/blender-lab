@@ -1740,7 +1740,7 @@
       "control": "Bake size",
       "card": "docs/experiments/BL-016.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.ops.object.bake",
@@ -1830,9 +1830,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -3816,7 +3816,7 @@
       "control": "Iterations",
       "card": "docs/experiments/BL-033.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.GeometryNodeRepeatInput",
@@ -3905,9 +3905,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4061,7 +4061,7 @@
       "control": "Width",
       "card": "docs/experiments/BL-035.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.NodeTreeInterface",
@@ -4150,9 +4150,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4182,7 +4182,7 @@
       "control": "Schema version",
       "card": "docs/experiments/BL-036.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.NodeTree",
@@ -4270,9 +4270,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4302,7 +4302,7 @@
       "control": "Control travel",
       "card": "docs/experiments/BL-037.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Driver",
@@ -4391,9 +4391,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4423,7 +4423,7 @@
       "control": "Target reach",
       "card": "docs/experiments/BL-038.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.KinematicConstraint",
@@ -4512,9 +4512,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4544,7 +4544,7 @@
       "control": "Pose blend",
       "card": "docs/experiments/BL-039.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.Action",
@@ -4636,9 +4636,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -4668,7 +4668,7 @@
       "control": "Sample step",
       "card": "docs/experiments/BL-040.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.ops.nla.bake",
@@ -4758,9 +4758,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -6863,7 +6863,7 @@
       "control": "World strength",
       "card": "docs/experiments/BL-058.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.World",
@@ -6951,9 +6951,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
@@ -6983,7 +6983,7 @@
       "control": "Pattern scale",
       "card": "docs/experiments/BL-059.md",
       "implementation": "implemented",
-      "verification": "not-run",
+      "verification": "expanded-qualification-pending",
       "evidence": "docs/BUILD_STATUS.md",
       "api_leads": [
         "bpy.types.ShaderNodeTexNoise",
@@ -7072,9 +7072,9 @@
       ],
       "states": {
         "implementation": "implemented",
-        "automated": "not-run",
+        "automated": "bounded-outcomes-passed",
         "editor": "not-run",
-        "visual": "not-run",
+        "visual": "previews-inspected",
         "downstream": "not-run"
       },
       "apiAvailability": [
