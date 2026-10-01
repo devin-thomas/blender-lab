@@ -1,0 +1,12 @@
+build/
+dist/
+evidence/
+__pycache__/
+*.pyc
+*.blend
+*.blend1
+node_modules/
+.cappy/
+capture/cappy.config.json
+*.local.json
+.DS_Store
